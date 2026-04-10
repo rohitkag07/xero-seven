@@ -1,0 +1,20 @@
+# Xero Seven AI Agency - Intelligent Business Automation
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Xero Seven AI Agency - We build multi-agent AI systems that automate your business. WhatsApp bots, lead qualification, appointment booking, and customer support powered by Google ADK." />
+    <meta name="theme-color" content="#050505" />
+    <title>Xero Seven AI Agency - Intelligent Business Automation</title>
+    <script type="module" crossorigin src="/assets/index-CX1_JNHS.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/jsx-runtime-C7M7YA1l.js">
+    <link rel="modulepreload" crossorigin href="/assets/loader-C6I5D2nv.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-DoK3V54H.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
