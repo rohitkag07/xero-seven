@@ -42,7 +42,7 @@ function PublicLayout() {
   return (
     <div className={`gp-root theme-${theme}${grain ? ' gp-grain' : ''} min-h-[100dvh]`}>
       <Navbar />
-      <main id="main-content" className="pt-24 pb-16">
+      <main id="main-content" className="pb-16">
         <Outlet />
       </main>
       <Footer />

@@ -13,7 +13,9 @@ export default function HomePage() {
   return (
     <div>
       <TweaksPanel />
-      <PremiumHeroSection />
+      <div className="pt-24">
+        <PremiumHeroSection />
+      </div>
       <PremiumStatsSection />
       <PremiumServicesSection />
       <IndustriesSection />
