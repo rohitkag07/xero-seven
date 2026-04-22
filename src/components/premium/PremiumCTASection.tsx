@@ -1,70 +1,156 @@
 import { motion } from 'framer-motion';
-import { CalendarCheck, Phone, ArrowRight } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
-import { ScrollReveal } from './ScrollReveal';
-import { DoubleBevel } from './PremiumComponents';
 
 export function PremiumCTASection() {
   return (
-    <section className="py-32 bg-gradient-to-b from-white to-gray-50">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal>
-          <DoubleBevel>
-            <div className="p-12 md:p-16 text-center space-y-8">
-              {/* Headline */}
-              <div>
-                <h2 className="text-4xl md:text-5xl font-light text-gray-950 -tracking-wider mb-4">
-                  Ready to transform your business?
-                </h2>
-                <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                  Join 180+ brands that trusted us to build their digital future. Your free strategy session is just a click away.
-                </p>
-              </div>
+    <section
+      style={{
+        padding: '96px 16px',
+        background: 'var(--page-bg)',
+        position: 'relative',
+      }}
+    >
+      <div style={{ maxWidth: 900, margin: '0 auto' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
+        >
+          <div
+            className="gp-card-mustard"
+            style={{
+              padding: '56px 40px',
+              textAlign: 'center',
+              position: 'relative',
+              overflow: 'hidden',
+            }}
+          >
+            {/* Decorative sparkles */}
+            <span className="gp-float" style={{ position: 'absolute', top: 20, left: 30, fontSize: 20, opacity: 0.5 }}>✦</span>
+            <span className="gp-float-r" style={{ position: 'absolute', top: 32, right: 40, fontSize: 16, opacity: 0.4 }}>★</span>
+            <span className="gp-float" style={{ position: 'absolute', bottom: 24, left: '45%', fontSize: 14, opacity: 0.35 }}>✦</span>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/contact">
-                  <motion.span
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gray-950 text-white font-medium hover:bg-gray-800 transition-all"
-                  >
-                    <CalendarCheck size={20} weight="bold" />
-                    Book a Free Call
-                    <ArrowRight size={18} weight="bold" className="group-hover:translate-x-1 transition-transform" />
-                  </motion.span>
-                </Link>
-                <a href="tel:+919000000000" aria-label="Call us">
-                  <motion.span
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border-2 border-gray-300 text-gray-900 font-medium hover:bg-gray-50 transition-all"
-                  >
-                    <Phone size={20} weight="bold" />
-                    Call Us
-                  </motion.span>
-                </a>
-              </div>
+            {/* Kicker */}
+            <span
+              className="gp-chip-ink"
+              style={{ marginBottom: 24, display: 'inline-flex' }}
+            >
+              🚀 READY TO LAUNCH?
+            </span>
 
-              {/* Social proof */}
-              <div className="pt-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-gray-600">
-                <div className="flex items-center gap-2">
-                  <div className="flex -space-x-2">
-                    {[1, 2, 3].map(i => (
-                      <div
-                        key={i}
-                        className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-200 to-blue-200 border-2 border-white"
-                      />
-                    ))}
-                  </div>
-                  <span>Join 180+ happy clients</span>
-                </div>
-                <div className="hidden sm:block w-px h-4 bg-gray-300" />
-                <span>Response time: Under 2 hours</span>
-              </div>
+            {/* Headline */}
+            <h2
+              style={{
+                fontFamily: '"Archivo Black", sans-serif',
+                fontSize: 'clamp(32px, 5vw, 56px)',
+                lineHeight: 0.95,
+                color: 'var(--charcoal)',
+                marginTop: 24,
+                marginBottom: 16,
+              }}
+            >
+              LET'S BUILD
+              <br />
+              <span
+                style={{
+                  WebkitTextStroke: '3px var(--charcoal)',
+                  color: 'transparent',
+                  paintOrder: 'stroke fill',
+                }}
+              >
+                SOMETHING EPIC.
+              </span>
+            </h2>
+
+            <p
+              style={{
+                fontFamily: '"Plus Jakarta Sans", sans-serif',
+                fontSize: 16,
+                lineHeight: 1.65,
+                color: 'var(--charcoal)',
+                opacity: 0.75,
+                maxWidth: 480,
+                margin: '0 auto 32px',
+              }}
+            >
+              Join 180+ brands that trusted us to build their digital future. Your free strategy session is just a click away.
+            </p>
+
+            {/* CTA Buttons */}
+            <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link to="/contact" style={{ textDecoration: 'none' }}>
+                <motion.button
+                  whileHover={{ y: -3, boxShadow: '7px 7px 0 var(--charcoal)' }}
+                  whileTap={{ scale: 0.97 }}
+                  className="gp-btn"
+                  style={{ fontSize: 13 }}
+                >
+                  ⚡ BOOK A FREE CALL
+                </motion.button>
+              </Link>
+              <a href="tel:+919009009000" style={{ textDecoration: 'none' }}>
+                <motion.button
+                  whileHover={{ y: -3, boxShadow: '7px 7px 0 var(--charcoal)' }}
+                  whileTap={{ scale: 0.97 }}
+                  className="gp-btn-bone"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 10,
+                    padding: '14px 26px',
+                    fontFamily: '"Archivo Black", sans-serif',
+                    fontSize: 13,
+                    letterSpacing: '0.04em',
+                    textTransform: 'uppercase' as const,
+                    border: '3.5px solid var(--charcoal)',
+                    borderRadius: 999,
+                    cursor: 'pointer',
+                    boxShadow: '4px 4px 0 var(--charcoal)',
+                    transition: 'transform 0.08s ease, box-shadow 0.08s ease',
+                  }}
+                >
+                  📞 CALL US
+                </motion.button>
+              </a>
             </div>
-          </DoubleBevel>
-        </ScrollReveal>
+
+            {/* Social proof */}
+            <div
+              style={{
+                marginTop: 32,
+                paddingTop: 24,
+                borderTop: '2.5px solid var(--charcoal)',
+                display: 'flex',
+                justifyContent: 'center',
+                gap: 32,
+                flexWrap: 'wrap',
+              }}
+            >
+              {[
+                { icon: '✅', text: '500+ PROJECTS DELIVERED' },
+                { icon: '⏱', text: 'RESPONSE: UNDER 2 HRS' },
+                { icon: '🌍', text: 'CLIENTS WORLDWIDE' },
+              ].map((item) => (
+                <span
+                  key={item.text}
+                  style={{
+                    fontFamily: '"JetBrains Mono", monospace',
+                    fontSize: 10,
+                    letterSpacing: '0.1em',
+                    color: 'var(--charcoal)',
+                    opacity: 0.65,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
+                  }}
+                >
+                  {item.icon} {item.text}
+                </span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

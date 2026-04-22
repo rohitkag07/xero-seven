@@ -7,10 +7,12 @@ import {
 } from '../components/premium';
 import IndustriesSection from '../components/IndustriesSection';
 import TechPowered from '../components/TechPowered';
+import { TweaksPanel } from '../components/TweaksPanel';
 
 export default function HomePage() {
   return (
-    <div className="bg-white">
+    <div>
+      <TweaksPanel />
       <PremiumHeroSection />
       <PremiumStatsSection />
       <PremiumServicesSection />

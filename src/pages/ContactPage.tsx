@@ -1,20 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Lightning, EnvelopeSimple, Phone, MapPin, PaperPlaneTilt, CheckCircle, CircleNotch } from '@phosphor-icons/react';
+import { EnvelopeSimple, Phone, MapPin, PaperPlaneTilt, CheckCircle, CircleNotch } from '@phosphor-icons/react';
 import { insforge } from '../lib/insforge';
-
-const bentoVariants = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: (i: number) => ({
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.5,
-      delay: i * 0.1,
-      ease: [0.32, 0.72, 0, 1],
-    },
-  }),
-};
 
 export default function ContactPage() {
   const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -55,7 +42,6 @@ export default function ContactPage() {
         });
       } catch (agentError) {
         console.error("AI Agent trigger failed:", agentError);
-        // We don't throw here so the user still sees the success message
       }
 
       setFormState('success');
@@ -65,219 +51,251 @@ export default function ContactPage() {
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-[#050505] via-[#0a0a0a] to-[#050505] relative overflow-hidden">
-      {/* Ethereal mesh gradient background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute w-96 h-96 rounded-full"
-          style={{
-            background: 'radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)',
-            top: '-20%',
-            right: '-10%',
-            filter: 'blur(40px)',
-          }}
-          animate={{
-            y: [0, 40, 0],
-            x: [0, 20, 0],
-          }}
-          transition={{ duration: 20, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute w-96 h-96 rounded-full"
-          style={{
-            background: 'radial-gradient(circle, rgba(34, 197, 94, 0.1) 0%, transparent 70%)',
-            bottom: '-20%',
-            left: '-10%',
-            filter: 'blur(40px)',
-          }}
-          animate={{
-            y: [0, -40, 0],
-            x: [0, -20, 0],
-          }}
-          transition={{ duration: 20, repeat: Infinity }}
-        />
-      </div>
+  const inputStyle: React.CSSProperties = {
+    width: '100%',
+    padding: '14px 16px',
+    fontFamily: '"Plus Jakarta Sans", sans-serif',
+    fontSize: 14,
+    background: 'var(--card-bg)',
+    border: '2.5px solid var(--charcoal)',
+    borderRadius: 16,
+    color: 'var(--text-body)',
+    outline: 'none',
+    transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+  };
 
-      <section className="section-padding pt-0 relative z-10">
-        <div className="container-width">
-          {/* Asymmetrical Bento Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+  const labelStyle: React.CSSProperties = {
+    fontFamily: '"JetBrains Mono", monospace',
+    fontSize: 10,
+    letterSpacing: '0.12em',
+    color: 'var(--text-muted)',
+    textTransform: 'uppercase',
+    marginBottom: 8,
+    display: 'block',
+  };
+
+  return (
+    <div style={{ paddingTop: 16 }}>
+      <section style={{ padding: '48px 16px 96px', position: 'relative' }}>
+        <div style={{ maxWidth: 1152, margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 40 }}>
+            {/* Header */}
             <motion.div
-              custom={0}
-              initial="hidden"
-              animate="visible"
-              variants={bentoVariants as any}
-              className="lg:col-span-2"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/5 backdrop-blur-sm mb-8">
-                <Lightning weight="fill" className="w-3 h-3 text-accent" />
-                <span className="text-[10px] text-accent uppercase tracking-[0.25em] font-semibold">Get in Touch</span>
-              </div>
-              <h1 className="text-5xl lg:text-6xl font-bold text-white tracking-tighter mb-6 leading-tight">
-                Let's Build Your<br />
-                <span className="text-accent/60">AI System</span>
+              <span className="gp-kicker-red" style={{ display: 'inline-flex', marginBottom: 20 }}>
+                📬 GET IN TOUCH
+              </span>
+              <h1 style={{
+                fontFamily: '"Archivo Black", sans-serif',
+                fontSize: 'clamp(40px, 6vw, 72px)',
+                lineHeight: 0.92,
+                color: 'var(--text-body)',
+                marginTop: 16,
+              }}>
+                LET'S BUILD
+                <br />
+                <span style={{ color: 'var(--hero-accent)', WebkitTextStroke: '3px var(--charcoal)', paintOrder: 'stroke fill' }}>
+                  YOUR AI SYSTEM.
+                </span>
               </h1>
-              <p className="text-base text-zinc-400 leading-relaxed max-w-[50ch] mb-12">
+              <p style={{
+                fontFamily: '"Plus Jakarta Sans", sans-serif',
+                fontSize: 16, lineHeight: 1.65,
+                color: 'var(--text-muted)', maxWidth: 520, marginTop: 20,
+              }}>
                 Tell us about your business and we'll design a custom AI automation plan. Free consultation, no commitment.
               </p>
 
-              <div className="space-y-5">
+              {/* Contact Info */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 32 }}>
                 {[
                   { icon: EnvelopeSimple, label: 'hello@xeroseven.ai' },
                   { icon: Phone, label: '+91 98765 43210' },
                   { icon: MapPin, label: 'Indore, Madhya Pradesh, India' },
                 ].map(({ icon: Icon, label }) => (
-                  <div key={label} className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/8 flex items-center justify-center text-zinc-400">
-                      <Icon weight="regular" className="w-5 h-5" />
+                  <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                    <div style={{
+                      width: 40, height: 40, borderRadius: 12,
+                      background: 'var(--card-alt)',
+                      border: '2.5px solid var(--charcoal)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      boxShadow: '2px 2px 0 var(--charcoal)',
+                    }}>
+                      <Icon weight="duotone" size={18} color="var(--charcoal)" />
                     </div>
-                    <span className="text-sm text-zinc-300">{label}</span>
+                    <span style={{
+                      fontFamily: '"Plus Jakarta Sans", sans-serif',
+                      fontSize: 14, color: 'var(--text-body)',
+                    }}>
+                      {label}
+                    </span>
                   </div>
                 ))}
               </div>
             </motion.div>
 
+            {/* Form Card */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
             >
-              <div className="p-1.5 rounded-4xl bg-white/[0.02] border border-white/5">
-                <div className="rounded-[calc(2rem-0.375rem)] bg-surface-100 border border-white/5 p-8 md:p-10 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
-                  <AnimatePresence mode="wait">
-                    {formState === 'success' ? (
-                      <motion.div
-                        key="success"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        className="text-center py-12"
+              <div className="gp-card" style={{ padding: '32px 28px' }}>
+                <AnimatePresence mode="wait">
+                  {formState === 'success' ? (
+                    <motion.div
+                      key="success"
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      style={{ textAlign: 'center', padding: '48px 0' }}
+                    >
+                      <CheckCircle weight="fill" size={64} color="var(--mint)" style={{ margin: '0 auto 16px' }} />
+                      <h3 style={{
+                        fontFamily: '"Archivo Black", sans-serif',
+                        fontSize: 20, color: 'var(--text-body)', marginBottom: 8,
+                      }}>
+                        MESSAGE SENT!
+                      </h3>
+                      <p style={{
+                        fontFamily: '"Plus Jakarta Sans", sans-serif',
+                        fontSize: 14, color: 'var(--text-muted)',
+                      }}>
+                        We will get back to you within 24 hours.
+                      </p>
+                      <button
+                        onClick={() => setFormState('idle')}
+                        className="gp-btn gp-btn-sm"
+                        style={{ marginTop: 24 }}
                       >
-                        <motion.div
-                          animate={{ scale: [1, 1.1, 1] }}
-                          transition={{ duration: 0.5 }}
-                        >
-                          <CheckCircle weight="fill" className="w-16 h-16 text-accent mx-auto mb-4" />
-                        </motion.div>
-                        <h3 className="text-xl font-semibold text-white mb-2">Message Sent!</h3>
-                        <p className="text-sm text-zinc-400">We will get back to you within 24 hours.</p>
-                        <button
-                          onClick={() => setFormState('idle')}
-                          className="mt-6 text-xs px-4 py-2 rounded-xl bg-accent/10 border border-accent/20 text-accent hover:bg-accent/20 transition-colors"
-                        >
-                          Send Another Message
-                        </button>
-                      </motion.div>
-                    ) : (
-                    <form onSubmit={handleSubmit} className="space-y-5">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        SEND ANOTHER MESSAGE
+                      </button>
+                    </motion.div>
+                  ) : (
+                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 }}>
                         <div>
-                          <label className="text-xs text-zinc-400 uppercase tracking-wider mb-2 block">Your Name</label>
+                          <label style={labelStyle}>YOUR NAME</label>
                           <input
                             type="text"
                             required
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            className="w-full px-4 py-3 rounded-xl bg-white/3 border border-white/8 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-accent/40 transition-colors"
+                            style={inputStyle}
                             placeholder="Rohit Kag"
                           />
                         </div>
                         <div>
-                          <label className="text-xs text-zinc-400 uppercase tracking-wider mb-2 block">Email</label>
+                          <label style={labelStyle}>EMAIL</label>
                           <input
                             type="email"
                             required
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            className="w-full px-4 py-3 rounded-xl bg-white/3 border border-white/8 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-accent/40 transition-colors"
+                            style={inputStyle}
                             placeholder="rohit@example.com"
                           />
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 }}>
                         <div>
-                          <label className="text-xs text-zinc-400 uppercase tracking-wider mb-2 block">Phone</label>
+                          <label style={labelStyle}>PHONE</label>
                           <input
                             type="tel"
                             value={formData.phone}
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                            className="w-full px-4 py-3 rounded-xl bg-white/3 border border-white/8 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-accent/40 transition-colors"
+                            style={inputStyle}
                             placeholder="+91 98765 43210"
                           />
                         </div>
                         <div>
-                          <label className="text-xs text-zinc-400 uppercase tracking-wider mb-2 block">Business</label>
+                          <label style={labelStyle}>BUSINESS</label>
                           <input
                             type="text"
                             value={formData.business}
                             onChange={(e) => setFormData({ ...formData, business: e.target.value })}
-                            className="w-full px-4 py-3 rounded-xl bg-white/3 border border-white/8 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-accent/40 transition-colors"
+                            style={inputStyle}
                             placeholder="Your Clinic Name"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="text-xs text-zinc-400 uppercase tracking-wider mb-2 block">Service Interest</label>
+                        <label style={labelStyle}>SERVICE INTEREST</label>
                         <select
                           value={formData.service}
                           onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                          className="w-full px-4 py-3 rounded-xl bg-white/3 border border-white/8 text-sm text-white focus:outline-none focus:border-accent/40 transition-colors appearance-none"
+                          style={{ ...inputStyle, appearance: 'none' as const }}
                         >
-                          <option value="" className="bg-surface-100 text-zinc-400">Select a service</option>
-                          <option value="webdev" className="bg-surface-100">Website Development</option>
-                          <option value="ecommerce" className="bg-surface-100">E-Commerce Store</option>
-                          <option value="saas" className="bg-surface-100">Custom Software / App</option>
-                          <option value="social_media" className="bg-surface-100">Social Media Management</option>
-                          <option value="content" className="bg-surface-100">Content & SEO Marketing</option>
-                          <option value="video" className="bg-surface-100">AI Video Production</option>
-                          <option value="whatsapp" className="bg-surface-100">WhatsApp Business Automation</option>
-                          <option value="leads" className="bg-surface-100">Lead Capture & Qualification</option>
-                          <option value="appointments" className="bg-surface-100">Appointment Booking System</option>
-                          <option value="support" className="bg-surface-100">Customer Support Bot</option>
-                          <option value="automation" className="bg-surface-100">Business Process Automation</option>
-                          <option value="photography" className="bg-surface-100">Photography & Video Production</option>
+                          <option value="">Select a service</option>
+                          <option value="webdev">Website Development</option>
+                          <option value="ecommerce">E-Commerce Store</option>
+                          <option value="saas">Custom Software / App</option>
+                          <option value="social_media">Social Media Management</option>
+                          <option value="content">Content & SEO Marketing</option>
+                          <option value="video">AI Video Production</option>
+                          <option value="whatsapp">WhatsApp Business Automation</option>
+                          <option value="leads">Lead Capture & Qualification</option>
+                          <option value="appointments">Appointment Booking System</option>
+                          <option value="support">Customer Support Bot</option>
+                          <option value="automation">Business Process Automation</option>
+                          <option value="photography">Photography & Video Production</option>
                         </select>
                       </div>
 
                       <div>
-                        <label className="text-xs text-zinc-400 uppercase tracking-wider mb-2 block">Message</label>
+                        <label style={labelStyle}>MESSAGE</label>
                         <textarea
                           rows={4}
                           value={formData.message}
                           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                          className="w-full px-4 py-3 rounded-xl bg-white/3 border border-white/8 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-accent/40 transition-colors resize-none"
+                          style={{ ...inputStyle, resize: 'none' }}
                           placeholder="Tell us about your business and what you want to automate..."
                         />
                       </div>
 
                       {formState === 'error' && (
-                        <p className="text-xs text-red-400">Something went wrong. Please try again.</p>
+                        <p style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: 'var(--red)' }}>
+                          Something went wrong. Please try again.
+                        </p>
                       )}
 
-                      <button
+                      <motion.button
                         type="submit"
                         disabled={formState === 'loading'}
-                        className="btn-primary w-full justify-center"
+                        whileHover={{ y: -2, boxShadow: '6px 6px 0 var(--charcoal)' }}
+                        whileTap={{ scale: 0.97 }}
+                        className="gp-btn-mustard"
+                        style={{
+                          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
+                          width: '100%', padding: '16px 28px',
+                          fontFamily: '"Archivo Black", sans-serif',
+                          fontSize: 13, letterSpacing: '0.04em',
+                          textTransform: 'uppercase',
+                          border: '3.5px solid var(--charcoal)',
+                          borderRadius: 999, cursor: 'pointer',
+                          boxShadow: '4px 4px 0 var(--charcoal)',
+                        }}
                       >
                         {formState === 'loading' ? (
                           <>
-                            <CircleNotch weight="bold" className="w-4 h-4 animate-spin" />
-                            Sending...
+                            <CircleNotch weight="bold" size={16} className="animate-spin" />
+                            SENDING...
                           </>
                         ) : (
                           <>
-                            Send Message
-                            <PaperPlaneTilt weight="fill" className="w-4 h-4" />
+                            SEND MESSAGE
+                            <PaperPlaneTilt weight="fill" size={16} />
                           </>
                         )}
-                      </button>
+                      </motion.button>
                     </form>
                   )}
-                  </AnimatePresence>
-                </div>
+                </AnimatePresence>
               </div>
             </motion.div>
           </div>

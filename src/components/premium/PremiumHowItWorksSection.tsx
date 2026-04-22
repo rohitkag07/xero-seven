@@ -1,143 +1,193 @@
 import { motion } from 'framer-motion';
-import { LightbulbFilament, Palette, Rocket, CheckCircle } from '@phosphor-icons/react';
-import { ScrollReveal } from './ScrollReveal';
-import { PremiumHeadline } from './PremiumComponents';
 
 const steps = [
   {
     number: '01',
-    icon: LightbulbFilament,
-    title: 'Discover & Plan',
+    emoji: '🔍',
+    title: 'DISCOVER & PLAN',
     description: 'We dive deep into your challenges, market, and vision. Together we craft a strategic roadmap tailored to your goals.',
-    details: ['Strategic audit', 'Competitive analysis', 'Goal setting', 'Timeline planning']
+    details: ['Strategic audit', 'Competitive analysis', 'Goal setting', 'Timeline planning'],
+    cardClass: 'gp-card-mustard',
   },
   {
     number: '02',
-    icon: Palette,
-    title: 'Design & Prototype',
+    emoji: '🎨',
+    title: 'DESIGN & PROTOTYPE',
     description: 'Our designers create stunning, user-centered designs. We prototype and iterate based on your feedback.',
-    details: ['Wireframes', 'Visual design', 'Prototyping', 'User testing']
+    details: ['Wireframes', 'Visual design', 'Prototyping', 'User testing'],
+    cardClass: 'gp-card-red',
   },
   {
     number: '03',
-    icon: Rocket,
-    title: 'Build & Optimize',
+    emoji: '⚡',
+    title: 'BUILD & OPTIMIZE',
     description: 'Our engineers build with modern tech stack. We optimize for speed, security, and scalability from day one.',
-    details: ['Development', 'Testing', 'Security audit', 'Performance optimization']
+    details: ['Development', 'Testing', 'Security audit', 'Performance optimization'],
+    cardClass: 'gp-card-purple',
   },
   {
     number: '04',
-    icon: CheckCircle,
-    title: 'Launch & Grow',
+    emoji: '🚀',
+    title: 'LAUNCH & GROW',
     description: 'We deploy your solution, set up analytics, and provide ongoing support. Then we help you scale.',
-    details: ['Deployment', 'Analytics setup', 'Monitoring', 'Growth strategy']
+    details: ['Deployment', 'Analytics setup', 'Monitoring', 'Growth strategy'],
+    cardClass: 'gp-card-mint',
   },
 ];
 
 export function PremiumHowItWorksSection() {
   return (
-    <section className="py-32 bg-white relative overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      style={{
+        padding: '96px 16px',
+        background: 'var(--page-bg)',
+        position: 'relative',
+      }}
+    >
+      <div style={{ maxWidth: 1152, margin: '0 auto' }}>
         {/* Header */}
-        <ScrollReveal className="mb-20">
-          <PremiumHeadline
-            level={2}
-            eyebrow="Our Process"
-            headline="How we build your success"
-            subheadline="From concept to launch—a proven, transparent process that ensures your vision becomes reality."
-          />
-        </ScrollReveal>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          style={{ marginBottom: 56 }}
+        >
+          <span className="gp-kicker" style={{ marginBottom: 20, display: 'inline-flex' }}>
+            ◆ SECTION 06 • THE PROCESS
+          </span>
+          <h2
+            style={{
+              fontFamily: '"Archivo Black", sans-serif',
+              fontSize: 'clamp(36px, 5vw, 64px)',
+              lineHeight: 0.92,
+              color: 'var(--text-body)',
+              marginTop: 20,
+            }}
+          >
+            HOW WE BUILD
+            <br />
+            <span
+              style={{
+                color: 'var(--hero-accent)',
+                WebkitTextStroke: '3px var(--charcoal)',
+                paintOrder: 'stroke fill',
+              }}
+            >
+              YOUR SUCCESS.
+            </span>
+          </h2>
+          <p
+            style={{
+              fontFamily: '"Plus Jakarta Sans", sans-serif',
+              fontSize: 16,
+              lineHeight: 1.65,
+              color: 'var(--text-muted)',
+              maxWidth: 520,
+              marginTop: 20,
+            }}
+          >
+            From concept to launch — a proven, transparent process that ensures your vision becomes reality.
+          </p>
+        </motion.div>
 
-        {/* Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step, idx) => {
-            const Icon = step.icon;
-            return (
-              <ScrollReveal key={step.number} delay={idx * 75}>
-                {/* Connector line (hidden on last item) */}
-                {idx < steps.length - 1 && (
-                  <div className="hidden lg:block absolute -right-4 top-20 w-8 h-px bg-gradient-to-r from-emerald-300 to-transparent" />
-                )}
-
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  transition={{ duration: 0.2 }}
-                  className="relative group"
-                >
-                  {/* Background gradient on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/0 to-emerald-50/0 group-hover:from-emerald-50 group-hover:to-white rounded-2xl transition-all duration-300" />
-
-                  <div className="relative p-6 rounded-2xl border border-gray-200 group-hover:border-emerald-200 transition-colors duration-300">
-                    {/* Step number */}
-                    <div className="text-5xl font-light text-gray-200 group-hover:text-emerald-100 transition-colors mb-4 -tracking-wider">
-                      {step.number}
-                    </div>
-
-                    {/* Icon */}
-                    <div className="w-12 h-12 rounded-lg bg-emerald-100 flex items-center justify-center mb-4 group-hover:shadow-lg group-hover:shadow-emerald-200/50 transition-all">
-                      <Icon size={24} weight="duotone" className="text-emerald-700" />
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="text-xl font-semibold text-gray-950 mb-2">
-                      {step.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                      {step.description}
-                    </p>
-
-                    {/* Details list */}
-                    <ul className="space-y-1.5">
-                      {step.details.map((detail, detailIdx) => (
-                        <motion.li
-                          key={detailIdx}
-                          initial={{ opacity: 0.5 }}
-                          whileHover={{ opacity: 1, x: 2 }}
-                          className="flex items-center gap-2 text-xs text-gray-600 transition-all"
-                        >
-                          <div className="w-1 h-1 rounded-full bg-emerald-600" />
-                          {detail}
-                        </motion.li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              </ScrollReveal>
-            );
-          })}
-        </div>
-
-        {/* Timeline visual (mobile-friendly alternative — hidden from screen readers to avoid duplicate content) */}
-        <div className="mt-20 lg:hidden" aria-hidden="true">
-          <div className="space-y-0 relative">
-            {steps.map((step, idx) => {
-              const Icon = step.icon;
-              return (
-                <div key={step.number} className="relative flex gap-6 pb-12">
-                  {/* Timeline line */}
-                  <div className="absolute left-6 top-10 bottom-0 w-0.5 bg-gradient-to-b from-emerald-300 to-emerald-100 last:hidden" />
-                  
-                  {/* Dot */}
-                  <div className="relative flex flex-col items-center">
-                    <div className="w-12 h-12 rounded-full bg-white border-2 border-emerald-300 flex items-center justify-center relative z-10">
-                      <Icon size={20} weight="bold" className="text-emerald-700" />
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1 pt-1">
-                    <p className="text-xs uppercase tracking-wider text-emerald-700 font-semibold mb-1">
-                      Step {idx + 1}
-                    </p>
-                    <h4 className="text-lg font-semibold text-gray-950 mb-2">{step.title}</h4>
-                    <p className="text-sm text-gray-600">{step.description}</p>
-                  </div>
+        {/* Steps grid */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+            gap: 24,
+          }}
+        >
+          {steps.map((step, idx) => (
+            <motion.div
+              key={step.number}
+              initial={{ opacity: 0, y: 32, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.32, 0.72, 0, 1] }}
+            >
+              <motion.div
+                whileHover={{ y: -6, boxShadow: '14px 14px 0 var(--charcoal)' }}
+                transition={{ duration: 0.15 }}
+                className={step.cardClass}
+                style={{
+                  padding: 28,
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  cursor: 'default',
+                }}
+              >
+                {/* Step number */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                  <span
+                    style={{
+                      fontFamily: '"Archivo Black", sans-serif',
+                      fontSize: 48,
+                      lineHeight: 1,
+                      color: 'var(--charcoal)',
+                      opacity: 0.15,
+                    }}
+                  >
+                    {step.number}
+                  </span>
+                  <span style={{ fontSize: 32 }}>{step.emoji}</span>
                 </div>
-              );
-            })}
-          </div>
+
+                {/* Title */}
+                <h3
+                  style={{
+                    fontFamily: '"Archivo Black", sans-serif',
+                    fontSize: 16,
+                    color: 'var(--charcoal)',
+                    letterSpacing: '0.02em',
+                    marginBottom: 10,
+                  }}
+                >
+                  {step.title}
+                </h3>
+
+                {/* Description */}
+                <p
+                  style={{
+                    fontFamily: '"Plus Jakarta Sans", sans-serif',
+                    fontSize: 13,
+                    lineHeight: 1.6,
+                    color: 'var(--charcoal)',
+                    opacity: 0.75,
+                    marginBottom: 18,
+                    flex: 1,
+                  }}
+                >
+                  {step.description}
+                </p>
+
+                {/* Details list */}
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                  {step.details.map((detail) => (
+                    <li
+                      key={detail}
+                      style={{
+                        fontFamily: '"JetBrains Mono", monospace',
+                        fontSize: 10,
+                        letterSpacing: '0.08em',
+                        color: 'var(--charcoal)',
+                        opacity: 0.6,
+                        padding: '3px 0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 8,
+                      }}
+                    >
+                      <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--charcoal)', opacity: 0.4 }} />
+                      {detail.toUpperCase()}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

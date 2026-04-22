@@ -1,116 +1,290 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Rocket, CheckCircle } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
-import { ScrollReveal } from './ScrollReveal';
-import { PremiumHeadline, DoubleBevel } from './PremiumComponents';
+
+const agents = [
+  { label: 'SCHOLAR • MEMORY',  color: 'var(--purple)' },
+  { label: 'CLOSER • REVENUE',  color: 'var(--red)' },
+  { label: 'SUMMONER • CORE',   color: 'var(--mustard)' },
+];
 
 export function PremiumHeroSection() {
   return (
-    <section className="min-h-[100dvh] bg-gradient-to-br from-white via-gray-50/50 to-white flex items-center justify-center relative overflow-hidden pt-20">
-      {/* Ambient background elements */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-10 right-20 w-96 h-96 bg-emerald-100/40 rounded-full blur-3xl opacity-30" />
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full h-1/2 bg-gradient-to-t from-emerald-50/30 to-transparent" />
-      </div>
+    <section
+      style={{
+        minHeight: '100dvh',
+        background: 'var(--mustard)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+        paddingTop: 96,
+      }}
+    >
+      {/* Ambient dot grid */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: 'radial-gradient(circle, var(--charcoal) 1px, transparent 1px)',
+          backgroundSize: '28px 28px',
+          opacity: 0.07,
+          pointerEvents: 'none',
+        }}
+      />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div style={{ maxWidth: 1152, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 2, width: '100%' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 56, alignItems: 'center' }}
+          className="block lg:grid"
+        >
           {/* Left: Headline & CTA */}
-          <ScrollReveal>
-            <div>
-              <PremiumHeadline
-                eyebrow="AI-Powered Agency"
-                headline="Build your empire faster"
-                subheadline="Design, develop, automate, and scale—all powered by cutting-edge AI agents and expert human craftsmanship."
-              />
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
+          >
+            {/* Eyebrow tag */}
+            <div style={{ display: 'flex', gap: 10, marginBottom: 20, flexWrap: 'wrap' }}>
+              <span
+                style={{
+                  background: 'var(--charcoal)',
+                  color: 'var(--bone)',
+                  fontFamily: '"JetBrains Mono", monospace',
+                  fontSize: 10,
+                  fontWeight: 700,
+                  letterSpacing: '0.1em',
+                  padding: '5px 12px',
+                  borderRadius: 999,
+                  border: '2px solid var(--charcoal)',
+                }}
+              >
+                V7.02 • GALACTIC CORE
+              </span>
+              <span
+                style={{
+                  background: 'var(--red)',
+                  color: 'var(--bone)',
+                  fontFamily: '"JetBrains Mono", monospace',
+                  fontSize: 10,
+                  fontWeight: 700,
+                  letterSpacing: '0.1em',
+                  padding: '5px 12px',
+                  borderRadius: 999,
+                  border: '2px solid var(--charcoal)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 5,
+                }}
+              >
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#fff', display: 'inline-block', opacity: 0.9 }} />
+                銀河バイト • LIVE
+              </span>
+            </div>
 
-              {/* CTAs */}
-              <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                <Link to="/contact">
-                  <motion.span
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="group inline-flex px-6 py-3 rounded-lg bg-gray-950 text-white font-medium hover:bg-gray-800 transition-all items-center justify-center gap-2"
-                  >
-                    Start Your Project
-                    <ArrowRight size={18} weight="bold" className="group-hover:translate-x-1 transition-transform" />
-                  </motion.span>
-                </Link>
-                <Link to="/demo">
-                  <motion.span
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="inline-flex px-6 py-3 rounded-lg border border-gray-300 text-gray-900 font-medium hover:bg-gray-50 transition-all items-center justify-center"
-                  >
-                    Watch Demo
-                  </motion.span>
-                </Link>
+            {/* Stroke-fill headline */}
+            <h1
+              style={{
+                fontFamily: '"Archivo Black", sans-serif',
+                fontSize: 'clamp(52px, 7vw, 88px)',
+                lineHeight: 1.0,
+                color: 'var(--charcoal)',
+                WebkitTextStroke: '0px',
+                margin: 0,
+                marginBottom: 20,
+              }}
+            >
+              LET'S<br />
+              BUILD YOUR<br />
+              <span
+                style={{
+                  color: 'var(--bone)',
+                  WebkitTextStroke: '3px var(--charcoal)',
+                  paintOrder: 'stroke fill',
+                  textShadow: '5px 5px 0 var(--charcoal)',
+                }}
+              >
+                AI SYSTEM.
+              </span>
+            </h1>
+
+            <p
+              style={{
+                fontFamily: '"Plus Jakarta Sans", sans-serif',
+                fontSize: 16,
+                lineHeight: 1.65,
+                color: 'var(--charcoal)',
+                opacity: 0.85,
+                maxWidth: 460,
+                marginBottom: 32,
+              }}
+            >
+              Indore's full-service digital agency. Websites, e-commerce, social media,
+              and AI automation — orchestrated by a swarm of intelligent agents.
+            </p>
+
+            {/* CTAs */}
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              <Link to="/contact" style={{ textDecoration: 'none' }}>
+                <motion.button
+                  whileHover={{ y: -2, boxShadow: '6px 6px 0 var(--charcoal)' }}
+                  whileTap={{ scale: 0.97 }}
+                  style={{
+                    background: 'var(--charcoal)',
+                    color: 'var(--bone)',
+                    border: '3px solid var(--charcoal)',
+                    borderRadius: 999,
+                    padding: '14px 28px',
+                    fontFamily: '"Archivo Black", sans-serif',
+                    fontSize: 12,
+                    letterSpacing: '0.08em',
+                    cursor: 'pointer',
+                    boxShadow: '4px 4px 0 var(--charcoal)',
+                  }}
+                >
+                  ⚡ DEPLOY THE SWARM
+                </motion.button>
+              </Link>
+              <Link to="/demo" style={{ textDecoration: 'none' }}>
+                <motion.button
+                  whileHover={{ y: -2, boxShadow: '6px 6px 0 var(--charcoal)' }}
+                  whileTap={{ scale: 0.97 }}
+                  style={{
+                    background: 'var(--bone)',
+                    color: 'var(--charcoal)',
+                    border: '3px solid var(--charcoal)',
+                    borderRadius: 999,
+                    padding: '14px 28px',
+                    fontFamily: '"Archivo Black", sans-serif',
+                    fontSize: 12,
+                    letterSpacing: '0.08em',
+                    cursor: 'pointer',
+                    boxShadow: '4px 4px 0 var(--charcoal)',
+                  }}
+                >
+                  BOOK A CALL ↗
+                </motion.button>
+              </Link>
+            </div>
+
+            {/* Trust row */}
+            <div style={{ display: 'flex', gap: 20, marginTop: 28, flexWrap: 'wrap' }}>
+              {['180+ Clients', '500+ Projects', '95% On-Time'].map((t) => (
+                <div
+                  key={t}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    fontFamily: '"JetBrains Mono", monospace',
+                    fontSize: 10,
+                    letterSpacing: '0.06em',
+                    color: 'var(--charcoal)',
+                    opacity: 0.75,
+                  }}
+                >
+                  <span style={{ color: 'var(--charcoal)', fontSize: 12 }}>◆</span>
+                  {t.toUpperCase()}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Right: Orbital agent visual */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.88 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.2, ease: [0.32, 0.72, 0, 1] }}
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            className="hidden lg:flex"
+          >
+            <div style={{ position: 'relative', width: 380, height: 380 }}>
+              {/* Orbit rings */}
+              {[200, 290, 370].map((size, i) => (
+                <div
+                  key={i}
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: size,
+                    height: size,
+                    borderRadius: '50%',
+                    border: '2px dashed var(--charcoal)',
+                    opacity: 0.15,
+                  }}
+                />
+              ))}
+
+              {/* Core */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: 120,
+                  height: 120,
+                  background: 'var(--charcoal)',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 0 0 4px var(--mustard), 0 0 0 7px var(--charcoal)',
+                  zIndex: 2,
+                }}
+              >
+                <span style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 36, color: 'var(--mustard)', lineHeight: 1 }}>X</span>
+                <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 7, color: 'var(--bone)', opacity: 0.7, letterSpacing: '0.06em', marginTop: 2 }}>XERO SEVEN</span>
               </div>
 
-              {/* Trust indicators */}
-              <div className="mt-8 space-y-2">
-                {[
-                  'No long-term contracts',
-                  'Money-back guarantee',
-                  'Dedicated support team'
-                ].map((item, idx) => (
+              {/* Orbiting agents */}
+              {agents.map((agent, i) => {
+                const angle = (i * 120 - 90) * (Math.PI / 180);
+                const r = 155;
+                const x = Math.cos(angle) * r;
+                const y = Math.sin(angle) * r;
+                return (
                   <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 + idx * 0.1 }}
-                    className="flex items-center gap-2 text-sm text-gray-600"
+                    key={agent.label}
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 18 + i * 4, repeat: Infinity, ease: 'linear' }}
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      width: 0,
+                      height: 0,
+                      zIndex: 3,
+                    }}
                   >
-                    <CheckCircle size={16} weight="fill" className="text-emerald-600 flex-shrink-0" />
-                    {item}
+                    <motion.div
+                      animate={{ rotate: -(360) }}
+                      transition={{ duration: 18 + i * 4, repeat: Infinity, ease: 'linear' }}
+                      style={{
+                        position: 'absolute',
+                        transform: `translate(calc(${x}px - 50%), calc(${y}px - 50%))`,
+                        background: agent.color,
+                        border: '2.5px solid var(--charcoal)',
+                        borderRadius: 10,
+                        padding: '7px 12px',
+                        fontFamily: '"JetBrains Mono", monospace',
+                        fontSize: 9,
+                        fontWeight: 700,
+                        letterSpacing: '0.06em',
+                        color: 'var(--charcoal)',
+                        whiteSpace: 'nowrap',
+                        boxShadow: '3px 3px 0 var(--charcoal)',
+                      }}
+                    >
+                      {agent.label}
+                    </motion.div>
                   </motion.div>
-                ))}
-              </div>
+                );
+              })}
             </div>
-          </ScrollReveal>
-
-          {/* Right: Visual showcase */}
-          <ScrollReveal delay={150}>
-            <div className="relative">
-              {/* Main showcase card */}
-              <DoubleBevel glassEffect className="aspect-square">
-                <div className="h-full bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
-                  <div className="text-center space-y-4">
-                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-emerald-100/50 border border-emerald-200">
-                      <Rocket size={40} weight="duotone" className="text-emerald-700" />
-                    </div>
-                    <div>
-                      <p className="font-medium text-gray-900">Xero Seven</p>
-                      <p className="text-sm text-gray-600">AI Agency Platform</p>
-                    </div>
-                  </div>
-                </div>
-              </DoubleBevel>
-
-              {/* Floating stats cards */}
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity }}
-                className="absolute -top-6 -right-6 w-40"
-              >
-                <div className="rounded-xl bg-white border border-gray-200 p-4 shadow-lg">
-                  <p className="text-xs text-gray-600 mb-1">AI Agents Active</p>
-                  <p className="text-2xl font-bold text-gray-950">12</p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
-                className="absolute -bottom-4 -left-4 w-48"
-              >
-                <div className="rounded-xl bg-white border border-gray-200 p-4 shadow-lg">
-                  <p className="text-xs text-gray-600 mb-1">Projects Completed</p>
-                  <p className="text-2xl font-bold text-gray-950">250+</p>
-                </div>
-              </motion.div>
-            </div>
-          </ScrollReveal>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -1,55 +1,113 @@
 import { Link } from 'react-router-dom';
-import { Lightning, LinkedinLogo, XLogo, EnvelopeSimple, InstagramLogo, ArrowUpRight } from '@phosphor-icons/react';
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 bg-zinc-950">
-      <div className="max-w-6xl mx-auto px-6 py-20">
+    <footer
+      style={{
+        borderTop: '3.5px solid var(--charcoal)',
+        background: 'var(--charcoal)',
+        color: 'var(--bone)',
+        position: 'relative',
+      }}
+    >
+      <div style={{ maxWidth: 1152, margin: '0 auto', padding: '64px 24px' }}>
         {/* Top grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
-
-          {/* Brand block — 5 cols */}
-          <div className="md:col-span-5">
-            <Link to="/" className="inline-flex items-center gap-2.5 mb-5">
-              <div className="w-7 h-7 rounded-lg bg-accent flex items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]">
-                <Lightning weight="fill" className="w-4 h-4 text-white" />
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: 48,
+          }}
+        >
+          {/* Brand */}
+          <div>
+            <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
+              <div
+                style={{
+                  width: 36,
+                  height: 36,
+                  background: 'var(--mustard)',
+                  borderRadius: 10,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '2.5px solid var(--bone)',
+                }}
+              >
+                <span style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 18, color: 'var(--charcoal)', lineHeight: 1 }}>X</span>
               </div>
-              <span className="font-outfit font-semibold text-base text-white tracking-tight">
-                Xero Seven
+              <span style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 14, color: 'var(--bone)', letterSpacing: '0.06em' }}>
+                XERO SEVEN
               </span>
             </Link>
-            <p className="font-dmsans text-zinc-500 text-sm leading-relaxed max-w-[30ch]">
+            <p
+              style={{
+                fontFamily: '"Plus Jakarta Sans", sans-serif',
+                fontSize: 13,
+                lineHeight: 1.7,
+                color: 'var(--bone)',
+                opacity: 0.55,
+                maxWidth: 280,
+              }}
+            >
               Indore's full-service digital agency. Websites, e-commerce, social media, photography, and AI automation — under one roof.
             </p>
-            {/* Social icons */}
-            <div className="flex items-center gap-2 mt-8">
+
+            {/* Social */}
+            <div style={{ display: 'flex', gap: 10, marginTop: 24 }}>
               {[
-                { icon: InstagramLogo, href: 'https://www.instagram.com/xeroseven', label: 'Instagram' },
-                { icon: XLogo, href: 'https://x.com/xeroseven', label: 'X / Twitter' },
-                { icon: LinkedinLogo, href: 'https://www.linkedin.com/company/xeroseven', label: 'LinkedIn' },
-                { icon: EnvelopeSimple, href: 'mailto:hello@xeroseven.ai', label: 'Email' },
-              ].map(({ icon: Icon, href, label }) => (
+                { label: 'Instagram', url: 'https://www.instagram.com/xeroseven', icon: '📸' },
+                { label: 'X', url: 'https://x.com/xeroseven', icon: '𝕏' },
+                { label: 'LinkedIn', url: 'https://www.linkedin.com/company/xeroseven', icon: '💼' },
+                { label: 'Email', url: 'mailto:hello@xeroseven.ai', icon: '✉️' },
+              ].map((s) => (
                 <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  target={href.startsWith('http') ? '_blank' : undefined}
-                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="w-8 h-8 rounded-full border border-white/8 flex items-center justify-center text-zinc-600 hover:text-white hover:border-white/20 hover:bg-white/5 transition-all duration-400 ease-[cubic-bezier(0.32,0.72,0,1)]"
+                  key={s.label}
+                  href={s.url}
+                  target={s.url.startsWith('http') ? '_blank' : undefined}
+                  rel={s.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  aria-label={s.label}
+                  style={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: 10,
+                    border: '2px solid rgba(253,245,228,0.15)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: 14,
+                    textDecoration: 'none',
+                    transition: 'all 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--mustard)';
+                    (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(255,201,60,0.1)';
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(253,245,228,0.15)';
+                    (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
+                  }}
                 >
-                  <Icon weight="regular" className="w-3.5 h-3.5" />
+                  {s.icon}
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Spacer */}
-          <div className="hidden md:block md:col-span-1" />
-
-          {/* Services — 3 cols */}
-          <div className="md:col-span-3">
-            <h4 className="font-outfit text-[10px] font-semibold text-zinc-600 uppercase tracking-[0.18em] mb-5">Services</h4>
-            <ul className="space-y-3">
+          {/* Services */}
+          <div>
+            <h4
+              style={{
+                fontFamily: '"JetBrains Mono", monospace',
+                fontSize: 10,
+                letterSpacing: '0.18em',
+                color: 'var(--mustard)',
+                marginBottom: 20,
+              }}
+            >
+              SERVICES
+            </h4>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {[
                 { label: 'Website Development', path: '/services#webdev' },
                 { label: 'E-Commerce Stores', path: '/services#ecommerce' },
@@ -58,10 +116,19 @@ export default function Footer() {
                 { label: 'Photography & Video', path: '/production' },
                 { label: 'Custom Software', path: '/services#saas' },
               ].map(({ label, path }) => (
-                <li key={label}>
+                <li key={label} style={{ marginBottom: 10 }}>
                   <Link
                     to={path}
-                    className="font-dmsans text-sm text-zinc-500 hover:text-zinc-300 transition-colors duration-300 flex items-center gap-1 group"
+                    style={{
+                      fontFamily: '"Plus Jakarta Sans", sans-serif',
+                      fontSize: 13,
+                      color: 'var(--bone)',
+                      opacity: 0.55,
+                      textDecoration: 'none',
+                      transition: 'opacity 0.2s ease',
+                    }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '1'; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '0.55'; }}
                   >
                     {label}
                   </Link>
@@ -70,20 +137,39 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Company — 3 cols */}
-          <div className="md:col-span-3">
-            <h4 className="font-outfit text-[10px] font-semibold text-zinc-600 uppercase tracking-[0.18em] mb-5">Company</h4>
-            <ul className="space-y-3">
+          {/* Company */}
+          <div>
+            <h4
+              style={{
+                fontFamily: '"JetBrains Mono", monospace',
+                fontSize: 10,
+                letterSpacing: '0.18em',
+                color: 'var(--mustard)',
+                marginBottom: 20,
+              }}
+            >
+              COMPANY
+            </h4>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {[
                 { label: 'About Us', path: '/about' },
                 { label: 'All Services', path: '/services' },
                 { label: 'Production Studio', path: '/production' },
                 { label: 'Contact', path: '/contact' },
               ].map(({ label, path }) => (
-                <li key={label}>
+                <li key={label} style={{ marginBottom: 10 }}>
                   <Link
                     to={path}
-                    className="font-dmsans text-sm text-zinc-500 hover:text-zinc-300 transition-colors duration-300"
+                    style={{
+                      fontFamily: '"Plus Jakarta Sans", sans-serif',
+                      fontSize: 13,
+                      color: 'var(--bone)',
+                      opacity: 0.55,
+                      textDecoration: 'none',
+                      transition: 'opacity 0.2s ease',
+                    }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '1'; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '0.55'; }}
                   >
                     {label}
                   </Link>
@@ -91,29 +177,81 @@ export default function Footer() {
               ))}
             </ul>
 
-            {/* CTA nudge */}
-            <div className="mt-10 p-4 rounded-2xl border border-white/5 bg-white/[0.02]">
-              <p className="font-outfit text-xs text-zinc-400 mb-3 leading-relaxed">
-                Ready to grow your business?
+            {/* CTA card */}
+            <div
+              style={{
+                marginTop: 28,
+                padding: 20,
+                border: '2.5px solid rgba(253,245,228,0.12)',
+                borderRadius: 20,
+                background: 'rgba(255,201,60,0.06)',
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: '"JetBrains Mono", monospace',
+                  fontSize: 10,
+                  color: 'var(--bone)',
+                  opacity: 0.6,
+                  letterSpacing: '0.08em',
+                  marginBottom: 12,
+                }}
+              >
+                READY TO GROW YOUR BUSINESS?
               </p>
               <Link
                 to="/contact"
-                className="group inline-flex items-center gap-1.5 text-xs font-outfit font-medium text-white hover:text-zinc-300 transition-colors"
+                style={{
+                  fontFamily: '"Archivo Black", sans-serif',
+                  fontSize: 12,
+                  color: 'var(--mustard)',
+                  textDecoration: 'none',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  letterSpacing: '0.04em',
+                }}
               >
-                Book a free call
-                <ArrowUpRight weight="bold" className="w-3 h-3 group-hover:translate-x-[1px] group-hover:-translate-y-[1px] transition-transform duration-300" />
+                BOOK A FREE CALL ↗
               </Link>
             </div>
           </div>
         </div>
 
         {/* Bottom strip */}
-        <div className="border-t border-white/5 mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="font-dmsans text-xs text-zinc-700">
-            &copy; 2026 Xero Seven Agency. All rights reserved.
+        <div
+          style={{
+            borderTop: '2px solid rgba(253,245,228,0.08)',
+            marginTop: 48,
+            paddingTop: 24,
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: 12,
+          }}
+        >
+          <p
+            style={{
+              fontFamily: '"JetBrains Mono", monospace',
+              fontSize: 10,
+              color: 'var(--bone)',
+              opacity: 0.35,
+              letterSpacing: '0.06em',
+            }}
+          >
+            © 2026 XERO SEVEN AGENCY. ALL RIGHTS RESERVED.
           </p>
-          <p className="font-dmsans text-xs text-zinc-700">
-            Based in Indore, India &middot; Serving clients worldwide
+          <p
+            style={{
+              fontFamily: '"JetBrains Mono", monospace',
+              fontSize: 10,
+              color: 'var(--bone)',
+              opacity: 0.35,
+              letterSpacing: '0.06em',
+            }}
+          >
+            BASED IN INDORE, INDIA • SERVING CLIENTS WORLDWIDE
           </p>
         </div>
       </div>

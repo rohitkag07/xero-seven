@@ -10,6 +10,9 @@ export default {
         outfit: ['Outfit', 'sans-serif'],
         dmsans: ['"DM Sans"', 'sans-serif'],
         mono: ['Geist Mono', 'monospace'],
+        archivo: ['"Archivo Black"', 'sans-serif'],
+        jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
+        jetbrains: ['"JetBrains Mono"', 'monospace'],
       },
       colors: {
         surface: {

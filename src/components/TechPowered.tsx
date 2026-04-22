@@ -12,19 +12,38 @@ const techStack = [
 
 export default function TechPowered() {
   return (
-    <section className="py-14 relative border-t border-b border-white/5">
-      <div className="container-width px-6">
+    <section
+      style={{
+        borderTop: '3.5px solid var(--charcoal)',
+        borderBottom: '3.5px solid var(--charcoal)',
+        background: 'var(--card-alt)',
+        padding: '48px 24px',
+        position: 'relative',
+      }}
+    >
+      <div style={{ maxWidth: 1152, margin: '0 auto' }}>
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="font-outfit text-[10px] text-zinc-600 uppercase tracking-[0.28em] text-center mb-8 font-semibold">
-            Powered by industry-leading technology
+          <p
+            style={{
+              fontFamily: '"JetBrains Mono", monospace',
+              fontSize: 10,
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              color: 'var(--text-muted)',
+              textAlign: 'center',
+              marginBottom: 28,
+              fontWeight: 700,
+            }}
+          >
+            POWERED BY INDUSTRY-LEADING TECHNOLOGY
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5 md:gap-x-16">
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '28px 48px' }}>
             {techStack.map((tech, i) => (
               <motion.div
                 key={tech.label}
@@ -32,11 +51,25 @@ export default function TechPowered() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.07, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="flex items-center gap-2 text-zinc-600 hover:text-zinc-300 transition-colors duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-default"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  color: 'var(--text-muted)',
+                  cursor: 'default',
+                  transition: 'color 0.2s ease',
+                }}
               >
-                <tech.icon weight="duotone" className="w-4 h-4" />
-                <span className="font-outfit text-xs font-medium tracking-tight">
-                  {tech.label}
+                <tech.icon weight="duotone" size={18} />
+                <span
+                  style={{
+                    fontFamily: '"JetBrains Mono", monospace',
+                    fontSize: 11,
+                    fontWeight: 700,
+                    letterSpacing: '0.06em',
+                  }}
+                >
+                  {tech.label.toUpperCase()}
                 </span>
               </motion.div>
             ))}

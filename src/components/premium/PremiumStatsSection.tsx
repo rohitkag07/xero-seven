@@ -1,76 +1,122 @@
 import { motion } from 'framer-motion';
-import { Users, Target, Rocket, Trophy } from '@phosphor-icons/react';
-import { ScrollReveal } from './ScrollReveal';
 
 const stats = [
-  {
-    icon: Users,
-    number: '180+',
-    label: 'Happy Clients',
-    description: 'Across tech, healthcare, retail, and more'
-  },
-  {
-    icon: Target,
-    number: '95%',
-    label: 'Success Rate',
-    description: 'Projects delivered on-time and on-budget'
-  },
-  {
-    icon: Rocket,
-    number: '500+',
-    label: 'Projects Launched',
-    description: 'From MVPs to enterprise platforms'
-  },
-  {
-    icon: Trophy,
-    number: '12+',
-    label: 'Years Combined',
-    description: 'Team expertise in digital innovation'
-  },
+  { number: '180+', label: 'HAPPY CLIENTS',       sub: 'Across tech, healthcare, retail' },
+  { number: '95%',  label: 'SUCCESS RATE',         sub: 'On-time, on-budget delivery' },
+  { number: '500+', label: 'PROJECTS LAUNCHED',    sub: 'MVPs to enterprise platforms' },
+  { number: '12+',  label: 'YEARS COMBINED',       sub: 'Team expertise in digital' },
+];
+
+const tickerItems = [
+  'XERO SEVEN', '★', 'GALACTIC AI AGENCY', '✦', 'SUMMON THE SWARM', '◉',
+  'V7.02 · 銀河バイト', '★', 'COMMAND THE GALAXY', '✦', 'INDORE · INDIA', '◉',
+  'XERO SEVEN', '★', 'GALACTIC AI AGENCY', '✦', 'SUMMON THE SWARM', '◉',
+  'V7.02 · 銀河バイト', '★', 'COMMAND THE GALAXY', '✦', 'INDORE · INDIA', '◉',
 ];
 
 export function PremiumStatsSection() {
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-50 to-white" aria-label="Agency stats">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="sr-only">Our Results</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {stats.map((stat, idx) => {
-            const Icon = stat.icon;
-            return (
-              <ScrollReveal key={idx} delay={idx * 75}>
-                <motion.div
-                  whileHover={{ y: -2 }}
-                  className="text-center"
-                >
-                  {/* Icon */}
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-emerald-100 mb-4 mx-auto">
-                    <Icon size={32} weight="duotone" className="text-emerald-700" />
-                  </div>
+    <section aria-label="Agency stats">
+      {/* Ticker bar */}
+      <div
+        style={{
+          background: 'var(--charcoal)',
+          borderTop: '3px solid var(--charcoal)',
+          borderBottom: '3px solid var(--charcoal)',
+          overflow: 'hidden',
+          padding: '10px 0',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            gap: 28,
+            whiteSpace: 'nowrap',
+            animation: 'gp-ticker 22s linear infinite',
+          }}
+        >
+          {tickerItems.map((item, i) => (
+            <span
+              key={i}
+              style={{
+                fontFamily: item.match(/[★✦◉]/) ? 'inherit' : '"Archivo Black", sans-serif',
+                fontSize: item.match(/[★✦◉]/) ? 14 : 11,
+                color: item.match(/[★✦◉]/) ? 'var(--mustard)' : 'var(--bone)',
+                letterSpacing: item.match(/[★✦◉]/) ? 0 : '0.1em',
+                flexShrink: 0,
+              }}
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
 
-                  {/* Number (animated counter) */}
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className="text-4xl md:text-5xl font-light text-gray-950 -tracking-wider mb-1"
-                  >
-                    {stat.number}
-                  </motion.div>
-
-                  {/* Label */}
-                  <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                    {stat.label}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-sm text-gray-600">
-                    {stat.description}
-                  </p>
-                </motion.div>
-              </ScrollReveal>
-            );
-          })}
+      {/* Stats grid */}
+      <div
+        style={{
+          background: 'var(--bone)',
+          borderBottom: '3px solid var(--charcoal)',
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 1152,
+            margin: '0 auto',
+            padding: '0 24px',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+          }}
+          className="grid-cols-2 md:grid-cols-4"
+        >
+          {stats.map((stat, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.08, duration: 0.5 }}
+              style={{
+                padding: '32px 24px',
+                borderRight: idx < stats.length - 1 ? '3px solid var(--charcoal)' : 'none',
+                textAlign: 'center',
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: '"Archivo Black", sans-serif',
+                  fontSize: 'clamp(36px, 4vw, 52px)',
+                  color: idx === 0 ? 'var(--red)' : idx === 1 ? 'var(--purple)' : idx === 2 ? 'var(--mustard-dark, #e6a800)' : 'var(--charcoal)',
+                  lineHeight: 1,
+                  marginBottom: 6,
+                }}
+              >
+                {stat.number}
+              </div>
+              <div
+                style={{
+                  fontFamily: '"JetBrains Mono", monospace',
+                  fontSize: 10,
+                  fontWeight: 700,
+                  letterSpacing: '0.1em',
+                  color: 'var(--charcoal)',
+                  marginBottom: 4,
+                }}
+              >
+                {stat.label}
+              </div>
+              <div
+                style={{
+                  fontFamily: '"Plus Jakarta Sans", sans-serif',
+                  fontSize: 12,
+                  color: 'var(--charcoal)',
+                  opacity: 0.6,
+                }}
+              >
+                {stat.sub}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

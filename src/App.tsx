@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
+import { useThemeStore } from './stores/useThemeStore';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import Navbar from './components/Navbar';
@@ -37,8 +38,9 @@ function PageLoader() {
 
 // A wrapper for the public-facing pages (Navbar + Footer)
 function PublicLayout() {
+  const { theme, grain } = useThemeStore();
   return (
-    <div className="min-h-[100dvh] bg-transparent text-zinc-200">
+    <div className={`gp-root theme-${theme}${grain ? ' gp-grain' : ''} min-h-[100dvh]`}>
       <Navbar />
       <main id="main-content" className="pt-24 pb-16">
         <Outlet />
