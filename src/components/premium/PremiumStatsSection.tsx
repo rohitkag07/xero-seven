@@ -55,7 +55,7 @@ export function PremiumStatsSection() {
       {/* Stats grid */}
       <div
         style={{
-          background: 'var(--bone)',
+          background: 'transparent',
           borderBottom: '3px solid var(--charcoal)',
         }}
       >

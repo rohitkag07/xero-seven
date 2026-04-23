@@ -18,7 +18,10 @@ export function PremiumHeroSection() {
         justifyContent: 'center',
         position: 'relative',
         overflow: 'hidden',
-        paddingTop: 96,
+        paddingTop: 'max(60px, 10vw)',
+        paddingBottom: 'max(40px, 5vw)',
+        paddingLeft: 'max(8px, 4vw)',
+        paddingRight: 'max(8px, 4vw)',
       }}
     >
       {/* Ambient dot grid */}
@@ -33,53 +36,21 @@ export function PremiumHeroSection() {
         }}
       />
 
-      <div style={{ maxWidth: 1152, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 2, width: '100%' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 56, alignItems: 'center' }}
-          className="block lg:grid"
+      <div style={{ maxWidth: 1152, margin: '0 auto', position: 'relative', zIndex: 2, width: '100%' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 40,
+          }}
+          className="lg:grid lg:grid-cols-2 lg:gap-[56px]"
         >
           {/* Left: Headline & CTA */}
           <motion.div
-            initial={{ opacity: 0, y: 32 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
+            transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
           >
-            {/* Eyebrow tag */}
-            <div style={{ display: 'flex', gap: 10, marginBottom: 20, flexWrap: 'wrap' }}>
-              <span
-                style={{
-                  background: 'var(--charcoal)',
-                  color: 'var(--bone)',
-                  fontFamily: '"JetBrains Mono", monospace',
-                  fontSize: 10,
-                  fontWeight: 700,
-                  letterSpacing: '0.1em',
-                  padding: '5px 12px',
-                  borderRadius: 999,
-                  border: '2px solid var(--charcoal)',
-                }}
-              >
-                V7.02 • GALACTIC CORE
-              </span>
-              <span
-                style={{
-                  background: 'var(--red)',
-                  color: 'var(--bone)',
-                  fontFamily: '"JetBrains Mono", monospace',
-                  fontSize: 10,
-                  fontWeight: 700,
-                  letterSpacing: '0.1em',
-                  padding: '5px 12px',
-                  borderRadius: 999,
-                  border: '2px solid var(--charcoal)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 5,
-                }}
-              >
-                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#fff', display: 'inline-block', opacity: 0.9 }} />
-                銀河バイト • LIVE
-              </span>
-            </div>
 
             {/* Stroke-fill headline */}
             <h1

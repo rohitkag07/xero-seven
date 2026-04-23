@@ -11,7 +11,7 @@ import { TweaksPanel } from '../components/TweaksPanel';
 
 export default function HomePage() {
   return (
-    <div>
+    <div style={{ background: 'var(--mustard)', minHeight: '100dvh' }}>
       <TweaksPanel />
       <div className="pt-24">
         <PremiumHeroSection />

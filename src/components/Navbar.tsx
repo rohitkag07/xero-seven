@@ -27,19 +27,27 @@ export default function Navbar() {
         initial={{ y: -48, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
-        className="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-max"
+        className="fixed top-0 left-0 right-0 w-full z-50"
+        style={{background: 'var(--mustard)', boxShadow: 'none', borderRadius: 0, border: 'none'}}
       >
         <div
           style={{
-            background: 'var(--bone)',
-            border: '3px solid var(--charcoal)',
-            borderRadius: 999,
-            padding: '6px 8px',
+            background: 'transparent',
+            border: 'none',
+            borderRadius: 0,
+            padding: '8px 0',
             display: 'flex',
             alignItems: 'center',
             gap: 4,
-            boxShadow: '4px 4px 0 var(--charcoal)',
+            boxShadow: 'none',
+            width: '100%',
+            justifyContent: 'space-between',
+            minWidth: 0,
+            overflow: 'auto',
+            maxWidth: '1280px',
+            margin: '0 auto',
           }}
+          className="w-full min-w-0 px-3 md:px-8"
         >
           {/* Logo */}
           <Link
@@ -47,31 +55,36 @@ export default function Navbar() {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 10,
-              paddingLeft: 10,
-              paddingRight: 12,
+              gap: 8,
+              paddingLeft: 8,
+              paddingRight: 10,
               textDecoration: 'none',
+              flexShrink: 0,
+              minWidth: 0,
             }}
+            className="md:gap-10 md:pl-10 md:pr-12 min-w-0"
           >
             {/* X mark */}
             <div
               style={{
-                width: 30,
-                height: 30,
+                width: 24,
+                height: 24,
                 background: 'var(--charcoal)',
-                borderRadius: 9,
+                borderRadius: 6,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
+              className="md:w-[30px] md:h-[30px] md:rounded-[9px]"
             >
               <span
                 style={{
                   fontFamily: '"Archivo Black", sans-serif',
-                  fontSize: 16,
+                  fontSize: 12,
                   color: 'var(--mustard)',
                   lineHeight: 1,
                 }}
+                className="md:text-base"
               >
                 X
               </span>
@@ -79,35 +92,38 @@ export default function Navbar() {
             <span
               style={{
                 fontFamily: '"Archivo Black", sans-serif',
-                fontSize: 13,
+                fontSize: 11,
                 color: 'var(--charcoal)',
                 letterSpacing: '0.06em',
+                display: 'block',
               }}
+              className="md:text-sm"
             >
               XERO SEVEN
             </span>
           </Link>
 
           {/* Divider */}
-          <div style={{ width: 2, height: 20, background: 'var(--charcoal)', opacity: 0.2, borderRadius: 1, margin: '0 4px' }} />
+          <div style={{ width: 2, height: 20, background: 'var(--charcoal)', opacity: 0.2, borderRadius: 1, margin: '0 4px' }} className="hidden md:block" />
 
           {/* Desktop nav links */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-1 min-w-0">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 style={{
-                  padding: '7px 14px',
+                  padding: '6px 12px',
                   borderRadius: 999,
                   fontFamily: '"JetBrains Mono", monospace',
-                  fontSize: 10,
+                  fontSize: 9,
                   fontWeight: 700,
                   letterSpacing: '0.08em',
                   textDecoration: 'none',
                   transition: 'all 0.2s ease',
                   background: location.pathname === link.path ? 'var(--charcoal)' : 'transparent',
                   color: location.pathname === link.path ? 'var(--bone)' : 'var(--charcoal)',
+                  whiteSpace: 'nowrap',
                 }}
               >
                 {link.label}
@@ -116,12 +132,12 @@ export default function Navbar() {
           </div>
 
           {/* Status dot + Get Started */}
-          <div className="hidden md:flex items-center gap-3 ml-2 mr-1">
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <div className="hidden md:flex items-center gap-2 ml-1 mr-1 min-w-0">
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
               <span
                 style={{
-                  width: 7,
-                  height: 7,
+                  width: 6,
+                  height: 6,
                   borderRadius: '50%',
                   background: '#22c55e',
                   display: 'inline-block',
@@ -132,7 +148,7 @@ export default function Navbar() {
               <span
                 style={{
                   fontFamily: '"JetBrains Mono", monospace',
-                  fontSize: 9,
+                  fontSize: 8,
                   letterSpacing: '0.1em',
                   color: 'var(--charcoal)',
                   opacity: 0.7,
@@ -148,13 +164,14 @@ export default function Navbar() {
                   color: 'var(--bone)',
                   border: '2.5px solid var(--charcoal)',
                   borderRadius: 999,
-                  padding: '7px 16px',
+                  padding: '6px 14px',
                   fontFamily: '"Archivo Black", sans-serif',
-                  fontSize: 10,
+                  fontSize: 9,
                   letterSpacing: '0.08em',
                   cursor: 'pointer',
                   boxShadow: '3px 3px 0 var(--charcoal)',
                   transition: 'transform 0.15s ease, box-shadow 0.15s ease',
+                  whiteSpace: 'nowrap',
                 }}
                 onMouseEnter={(e) => {
                   (e.currentTarget as HTMLButtonElement).style.transform = 'translate(-1px,-1px)';
@@ -173,7 +190,7 @@ export default function Navbar() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden"
+            className="md:hidden ml-auto"
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
@@ -181,10 +198,14 @@ export default function Navbar() {
               background: 'none',
               border: 'none',
               cursor: 'pointer',
-              padding: '8px',
+              padding: '6px',
               color: 'var(--charcoal)',
-              fontSize: 20,
+              fontSize: 18,
               lineHeight: 1,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              minWidth: 0,
             }}
           >
             {isOpen ? '✕' : '☰'}
@@ -213,8 +234,13 @@ export default function Navbar() {
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: 8,
+              gap: 12,
+              paddingTop: 80,
+              paddingBottom: 40,
+              paddingLeft: 16,
+              paddingRight: 16,
             }}
+            onClick={() => setIsOpen(false)}
           >
             {navLinks.map((link, i) => (
               <motion.div
@@ -223,6 +249,7 @@ export default function Navbar() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: 16, opacity: 0 }}
                 transition={{ delay: i * 0.07, duration: 0.4 }}
+                onClick={(e) => e.stopPropagation()}
               >
                 <Link
                   to={link.path}
@@ -230,7 +257,7 @@ export default function Navbar() {
                   style={{
                     display: 'block',
                     fontFamily: '"Archivo Black", sans-serif',
-                    fontSize: 36,
+                    fontSize: 28,
                     color: 'var(--charcoal)',
                     textDecoration: 'none',
                     padding: '8px 0',
@@ -246,6 +273,7 @@ export default function Navbar() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.32, duration: 0.4 }}
               style={{ marginTop: 24 }}
+              onClick={(e) => e.stopPropagation()}
             >
               <Link to="/dashboard" onClick={() => setIsOpen(false)}>
                 <button
@@ -254,9 +282,9 @@ export default function Navbar() {
                     color: 'var(--bone)',
                     border: '3px solid var(--charcoal)',
                     borderRadius: 999,
-                    padding: '14px 32px',
+                    padding: '12px 24px',
                     fontFamily: '"Archivo Black", sans-serif',
-                    fontSize: 14,
+                    fontSize: 12,
                     letterSpacing: '0.06em',
                     cursor: 'pointer',
                     boxShadow: '4px 4px 0 var(--charcoal)',
