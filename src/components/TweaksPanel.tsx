@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useThemeStore } from '../stores/useThemeStore';
 import type { Theme } from '../stores/useThemeStore';
+import { XIcon } from '@phosphor-icons/react';
 
 const themes: { id: Theme; label: string; key: string }[] = [
   { id: 'sun',    label: 'SUN LORD', key: 'A' },
@@ -17,7 +18,7 @@ export function TweaksPanel() {
       style={{
         position: 'fixed',
         bottom: 24,
-        right: 24,
+        left: 24,
         zIndex: 9999,
         fontFamily: '"JetBrains Mono", monospace',
       }}
@@ -30,7 +31,8 @@ export function TweaksPanel() {
             background: 'var(--bone)',
             border: '3px solid var(--charcoal)',
             borderRadius: 14,
-            padding: '10px 18px',
+            padding: '12px 20px',
+            minHeight: 44,
             fontSize: 11,
             fontFamily: '"JetBrains Mono", monospace',
             fontWeight: 700,
@@ -40,7 +42,7 @@ export function TweaksPanel() {
             letterSpacing: '0.08em',
           }}
         >
-          TWEAKS ⚙
+          TWEAKS
         </button>
       )}
 
@@ -74,9 +76,12 @@ export function TweaksPanel() {
                 onClick={() => setOpen(false)}
                 style={{
                   background: 'none', border: 'none', cursor: 'pointer',
-                  fontSize: 14, color: 'var(--charcoal)', lineHeight: 1, padding: 0,
+                  color: 'var(--charcoal)', lineHeight: 1,
+                  padding: '6px', margin: '-6px',
+                  minWidth: 32, minHeight: 32,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}
-              >✕</button>
+              ><XIcon weight="bold" size={14} /></button>
             </div>
           </div>
 

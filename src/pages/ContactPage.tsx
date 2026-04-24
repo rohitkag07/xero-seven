@@ -1,9 +1,13 @@
-import { useState, type FormEvent } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { EnvelopeSimple, Phone, MapPin, PaperPlaneTilt, CheckCircle, CircleNotch } from '@phosphor-icons/react';
+import { EnvelopeSimpleIcon, PhoneIcon, MapPinIcon, PaperPlaneTiltIcon, CheckCircleIcon, CircleNotchIcon } from '@phosphor-icons/react';
 import { insforge } from '../lib/insforge';
 
 export default function ContactPage() {
+  useEffect(() => {
+    document.title = 'Contact — Xero Seven AI Agency';
+  }, []);
+
   const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [formData, setFormData] = useState({
     name: '',
@@ -14,7 +18,7 @@ export default function ContactPage() {
     message: '',
   });
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: { preventDefault(): void }) => {
     e.preventDefault();
     setFormState('loading');
 
@@ -75,8 +79,8 @@ export default function ContactPage() {
   };
 
   return (
-    <div style={{ paddingTop: 16 }}>
-      <section style={{ padding: '48px 16px 96px', position: 'relative' }}>
+    <div style={{ paddingTop: 0 }}>
+      <section style={{ padding: '120px 16px 96px', position: 'relative' }}>
         <div style={{ maxWidth: 1152, margin: '0 auto' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 40 }}>
             {/* Header */}
@@ -85,9 +89,6 @@ export default function ContactPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
             >
-              <span className="gp-kicker-red" style={{ display: 'inline-flex', marginBottom: 20 }}>
-                📬 GET IN TOUCH
-              </span>
               <h1 style={{
                 fontFamily: '"Archivo Black", sans-serif',
                 fontSize: 'clamp(40px, 6vw, 72px)',
@@ -112,9 +113,9 @@ export default function ContactPage() {
               {/* Contact Info */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 32 }}>
                 {[
-                  { icon: EnvelopeSimple, label: 'hello@xeroseven.ai' },
-                  { icon: Phone, label: '+91 98765 43210' },
-                  { icon: MapPin, label: 'Indore, Madhya Pradesh, India' },
+                  { icon: EnvelopeSimpleIcon, label: 'hello@xeroseven.ai' },
+                  { icon: PhoneIcon, label: '+91 78691 61842' },
+                  { icon: MapPinIcon, label: 'Indore, Madhya Pradesh, India' },
                 ].map(({ icon: Icon, label }) => (
                   <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
                     <div style={{
@@ -153,7 +154,7 @@ export default function ContactPage() {
                       exit={{ opacity: 0, scale: 0.95 }}
                       style={{ textAlign: 'center', padding: '48px 0' }}
                     >
-                      <CheckCircle weight="fill" size={64} color="var(--mint)" style={{ margin: '0 auto 16px' }} />
+                      <CheckCircleIcon weight="fill" size={64} color="var(--mint)" style={{ margin: '0 auto 16px' }} />
                       <h3 style={{
                         fontFamily: '"Archivo Black", sans-serif',
                         fontSize: 20, color: 'var(--text-body)', marginBottom: 8,
@@ -209,7 +210,7 @@ export default function ContactPage() {
                             value={formData.phone}
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                             style={inputStyle}
-                            placeholder="+91 98765 43210"
+                            placeholder="+91 78691 61842"
                           />
                         </div>
                         <div>
@@ -283,13 +284,13 @@ export default function ContactPage() {
                       >
                         {formState === 'loading' ? (
                           <>
-                            <CircleNotch weight="bold" size={16} className="animate-spin" />
+                            <CircleNotchIcon weight="bold" size={16} className="animate-spin" />
                             SENDING...
                           </>
                         ) : (
                           <>
                             SEND MESSAGE
-                            <PaperPlaneTilt weight="fill" size={16} />
+                            <PaperPlaneTiltIcon weight="fill" size={16} />
                           </>
                         )}
                       </motion.button>

@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { 
-  Camera, VideoCamera, Drone, Sparkle, Image, FilmStrip,
-  ArrowRight, CheckCircle, CurrencyInr
+import {
+  CameraIcon, VideoCameraIcon, DroneIcon, SparkleIcon, ImageIcon, FilmStripIcon,
+  ArrowRightIcon, CheckCircleIcon, CurrencyInrIcon
 } from '@phosphor-icons/react';
 
 const productionServices = [
   {
-    icon: Camera,
+    icon: CameraIcon,
     title: 'Product Photography',
     description: 'High-quality product shots for your e-commerce store, catalog, or social media. White background, lifestyle, or creative compositions — ready to sell.',
     features: ['E-commerce ready white background', 'Lifestyle & context shots', 'Multiple angles per product', '48-hour delivery', 'Basic retouching included', 'Web & print formats'],
@@ -17,7 +17,7 @@ const productionServices = [
     bgColor: 'var(--mustard-lt)',
   },
   {
-    icon: Sparkle,
+    icon: SparkleIcon,
     title: 'Brand Photography',
     description: 'Team headshots, office environment, founder portraits, and brand lifestyle imagery. Everything you need for your website, LinkedIn, and marketing materials.',
     features: ['Professional team headshots', 'Office & workspace photography', 'Founder portrait sessions', 'Brand lifestyle imagery', 'Social media optimized', 'Full retouching & color grading'],
@@ -26,7 +26,7 @@ const productionServices = [
     bgColor: 'var(--purple-lt)',
   },
   {
-    icon: FilmStrip,
+    icon: FilmStripIcon,
     title: 'Event Coverage',
     description: 'Corporate events, product launches, exhibitions, conferences, and celebrations. Full day coverage with same-day highlight reel delivery.',
     features: ['Full-day event coverage', 'Same-day highlight reel', 'Candid + staged shots', 'Video highlights (30-60s)', 'Online gallery delivery', 'Raw + edited files'],
@@ -35,7 +35,7 @@ const productionServices = [
     bgColor: 'var(--red-lt)',
   },
   {
-    icon: VideoCamera,
+    icon: VideoCameraIcon,
     title: 'Video Production',
     description: 'Promotional videos, testimonials, product demos, brand stories, and social media reels. Script to screen — we handle everything.',
     features: ['Script writing & storyboarding', 'Professional videography', 'Motion graphics & text', 'Background music & SFX', 'Multiple format delivery', 'Reels, YouTube, Ads formats'],
@@ -44,7 +44,7 @@ const productionServices = [
     bgColor: '#8AEFCA',
   },
   {
-    icon: Drone,
+    icon: DroneIcon,
     title: 'Drone & Aerial',
     description: 'Stunning aerial photography and videography for real estate, construction sites, event venues, and brand campaigns. Licensed drone operators.',
     features: ['4K aerial video', 'High-res aerial stills', 'Licensed operators', 'Real estate walkthroughs', 'Construction progress shots', 'Event venue overviews'],
@@ -53,7 +53,7 @@ const productionServices = [
     bgColor: 'var(--purple-lt)',
   },
   {
-    icon: Image,
+    icon: ImageIcon,
     title: 'Post-Production',
     description: 'Professional photo editing, video editing, color grading, retouching, and batch processing. We make your raw content look magazine-ready.',
     features: ['Advanced photo retouching', 'Video editing & cuts', 'Color grading & correction', 'Background removal', 'Batch processing', 'Rush delivery available'],
@@ -64,9 +64,13 @@ const productionServices = [
 ];
 
 export default function ProductionPage() {
+  useEffect(() => {
+    document.title = 'Production Studio — Xero Seven AI Agency';
+  }, []);
+
   return (
-    <div style={{ paddingTop: 16 }}>
-      <section style={{ padding: '48px 16px 96px', position: 'relative' }}>
+    <div style={{ paddingTop: 0 }}>
+      <section style={{ padding: '120px 16px 96px', position: 'relative' }}>
         <div style={{ maxWidth: 1152, margin: '0 auto' }}>
           {/* Hero */}
           <motion.div
@@ -75,8 +79,8 @@ export default function ProductionPage() {
             transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
             style={{ marginBottom: 56 }}
           >
-            <span className="gp-kicker-purple" style={{ display: 'inline-flex', marginBottom: 20 }}>
-              📸 PRODUCTION STUDIO
+            <span className="gp-kicker-purple" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 20 }}>
+              <CameraIcon weight="duotone" size={11} /> PRODUCTION STUDIO
             </span>
             <h1
               style={{
@@ -167,7 +171,7 @@ export default function ProductionPage() {
                           fontSize: 10, letterSpacing: '0.06em',
                           color: 'var(--text-muted)',
                         }}>
-                          <CheckCircle weight="fill" size={14} color={service.cardColor} />
+                          <CheckCircleIcon weight="fill" size={14} color={service.cardColor} />
                           {f}
                         </li>
                       ))}
@@ -181,7 +185,7 @@ export default function ProductionPage() {
                     }}>
                       <Link to="/contact" style={{ textDecoration: 'none' }}>
                         <button className="gp-btn gp-btn-sm" style={{ fontSize: 10 }}>
-                          BOOK NOW <ArrowRight weight="bold" size={12} />
+                          BOOK NOW <ArrowRightIcon weight="bold" size={12} />
                         </button>
                       </Link>
                       <button
@@ -200,7 +204,7 @@ export default function ProductionPage() {
                           letterSpacing: '0.06em',
                         }}
                       >
-                        <CurrencyInr weight="bold" size={12} />
+                        <CurrencyInrIcon weight="bold" size={12} />
                         {showPrice ? 'HIDE' : 'PRICE'}
                       </button>
                     </div>

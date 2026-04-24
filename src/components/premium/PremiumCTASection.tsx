@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { RocketLaunchIcon, LightningIcon, CheckCircleIcon, TimerIcon, GlobeIcon, PhoneIcon } from '@phosphor-icons/react';
 
 export function PremiumCTASection() {
   return (
@@ -34,9 +35,9 @@ export function PremiumCTASection() {
             {/* Kicker */}
             <span
               className="gp-chip-ink"
-              style={{ marginBottom: 24, display: 'inline-flex' }}
+              style={{ marginBottom: 24, display: 'inline-flex', alignItems: 'center', gap: 6 }}
             >
-              🚀 READY TO LAUNCH?
+              <RocketLaunchIcon weight="duotone" size={12} /> READY TO LAUNCH?
             </span>
 
             {/* Headline */}
@@ -74,7 +75,7 @@ export function PremiumCTASection() {
                 margin: '0 auto 32px',
               }}
             >
-              Join 180+ brands that trusted us to build their digital future. Your free strategy session is just a click away.
+              Join 15+ brands that trusted us to build their digital future. Your free strategy session is just a click away.
             </p>
 
             {/* CTA Buttons */}
@@ -86,10 +87,10 @@ export function PremiumCTASection() {
                   className="gp-btn"
                   style={{ fontSize: 13 }}
                 >
-                  ⚡ BOOK A FREE CALL
+                  <LightningIcon weight="duotone" size={14} style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: 6 }} /> BOOK A FREE CALL
                 </motion.button>
               </Link>
-              <a href="tel:+919009009000" style={{ textDecoration: 'none' }}>
+              <a href="tel:+917869161842" style={{ textDecoration: 'none' }}>
                 <motion.button
                   whileHover={{ y: -3, boxShadow: '7px 7px 0 var(--charcoal)' }}
                   whileTap={{ scale: 0.97 }}
@@ -110,7 +111,7 @@ export function PremiumCTASection() {
                     transition: 'transform 0.08s ease, box-shadow 0.08s ease',
                   }}
                 >
-                  📞 CALL US
+                  <PhoneIcon weight="duotone" size={14} style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: 6 }} /> CALL US
                 </motion.button>
               </a>
             </div>
@@ -127,11 +128,11 @@ export function PremiumCTASection() {
                 flexWrap: 'wrap',
               }}
             >
-              {[
-                { icon: '✅', text: '500+ PROJECTS DELIVERED' },
-                { icon: '⏱', text: 'RESPONSE: UNDER 2 HRS' },
-                { icon: '🌍', text: 'CLIENTS WORLDWIDE' },
-              ].map((item) => (
+              {([
+                { Icon: CheckCircleIcon, text: '30+ PROJECTS DELIVERED' },
+                { Icon: TimerIcon, text: 'RESPONSE: UNDER 2 HRS' },
+                { Icon: GlobeIcon, text: 'CLIENTS WORLDWIDE' },
+              ] as const).map((item) => (
                 <span
                   key={item.text}
                   style={{
@@ -145,7 +146,7 @@ export function PremiumCTASection() {
                     gap: 6,
                   }}
                 >
-                  {item.icon} {item.text}
+                  <item.Icon weight="duotone" size={14} /> {item.text}
                 </span>
               ))}
             </div>

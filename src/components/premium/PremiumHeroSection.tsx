@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { LightningIcon } from '@phosphor-icons/react';
 
 const agents = [
   { label: 'SCHOLAR • MEMORY',  color: 'var(--purple)' },
@@ -13,15 +14,10 @@ export function PremiumHeroSection() {
       style={{
         minHeight: '100dvh',
         background: 'var(--mustard)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
         position: 'relative',
         overflow: 'hidden',
-        paddingTop: 'max(60px, 10vw)',
-        paddingBottom: 'max(40px, 5vw)',
-        paddingLeft: 'max(8px, 4vw)',
-        paddingRight: 'max(8px, 4vw)',
+        paddingTop: 'clamp(110px, 12vh, 130px)',
+        paddingBottom: 'clamp(60px, 10vh, 120px)',
       }}
     >
       {/* Ambient dot grid */}
@@ -36,15 +32,8 @@ export function PremiumHeroSection() {
         }}
       />
 
-      <div style={{ maxWidth: 1152, margin: '0 auto', position: 'relative', zIndex: 2, width: '100%' }}>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 40,
-          }}
-          className="lg:grid lg:grid-cols-2 lg:gap-[56px]"
-        >
+      <div style={{ maxWidth: 1152, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 2, width: '100%' }}>
+        <div className="flex flex-col gap-10 lg:grid lg:grid-cols-2 lg:gap-14 lg:items-center">
           {/* Left: Headline & CTA */}
           <motion.div
             initial={{ opacity: 0, y: 18 }}
@@ -112,7 +101,7 @@ export function PremiumHeroSection() {
                     boxShadow: '4px 4px 0 var(--charcoal)',
                   }}
                 >
-                  ⚡ DEPLOY THE SWARM
+                  <LightningIcon weight="duotone" size={14} style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: 6 }} /> DEPLOY THE SWARM
                 </motion.button>
               </Link>
               <Link to="/demo" style={{ textDecoration: 'none' }}>
@@ -139,7 +128,7 @@ export function PremiumHeroSection() {
 
             {/* Trust row */}
             <div style={{ display: 'flex', gap: 20, marginTop: 28, flexWrap: 'wrap' }}>
-              {['180+ Clients', '500+ Projects', '95% On-Time'].map((t) => (
+              {['15+ Clients', '30+ Projects', '3 Years Exp'].map((t) => (
                 <div
                   key={t}
                   style={{

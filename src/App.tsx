@@ -1,33 +1,57 @@
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, Component, type ReactNode } from 'react';
 import { useThemeStore } from './stores/useThemeStore';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
-import ServicesPage from './pages/ServicesPage';
-import AboutPage from './pages/AboutPage';
-import ContactPage from './pages/ContactPage';
-import DemoPage from './pages/DemoPage';
-import ProductionPage from './pages/ProductionPage';
+import { TweaksPanel } from './components/TweaksPanel';
+import { WhatsAppToggle } from './components/WhatsAppToggle';
 import { LoginPage } from './pages/LoginPage';
 import { SignUpPage } from './pages/SignUpPage';
 import { Loader } from 'lucide-react';
 import { GradientDots } from './components/ui/gradient-dots';
 
-// Dashboard (Lazy loaded)
-const DashboardLayout = lazy(() => import('./components/dashboard/DashboardLayout').then(module => ({ default: module.DashboardLayout })));
-const DashboardHome = lazy(() => import('./pages/dashboard/DashboardHome').then(module => ({ default: module.DashboardHome })));
-const LeadsPage = lazy(() => import('./pages/dashboard/LeadsPage').then(module => ({ default: module.LeadsPage })));
-const ProjectsPage = lazy(() => import('./pages/dashboard/ProjectsPage').then(module => ({ default: module.ProjectsPage })));
-const ClientsPage = lazy(() => import('./pages/dashboard/ClientsPage').then(module => ({ default: module.ClientsPage })));
-const AnalyticsPage = lazy(() => import('./pages/dashboard/AnalyticsPage').then(module => ({ default: module.AnalyticsPage })));
-const AgentsPage = lazy(() => import('./pages/dashboard/AgentsPage').then(module => ({ default: module.AgentsPage })));
-const ProposalsPage = lazy(() => import('./pages/dashboard/ProposalsPage').then(module => ({ default: module.ProposalsPage })));
-const MissionControl = lazy(() => import('./pages/dashboard/MissionControl').then(module => ({ default: module.MissionControl })));
+// Public pages — lazy loaded for code splitting (#1)
+const HomePage      = lazy(() => import('./pages/HomePage'));
+const ServicesPage  = lazy(() => import('./pages/ServicesPage'));
+const AboutPage     = lazy(() => import('./pages/AboutPage'));
+const ContactPage   = lazy(() => import('./pages/ContactPage'));
+const DemoPage      = lazy(() => import('./pages/DemoPage'));
+const HowItWorksPage = lazy(() => import('./pages/HowItWorksPage'));
 
-// Loading Component
+// Dashboard — lazy loaded
+const DashboardLayout = lazy(() => import('./components/dashboard/DashboardLayout').then(m => ({ default: m.DashboardLayout })));
+const DashboardHome   = lazy(() => import('./pages/dashboard/DashboardHome').then(m => ({ default: m.DashboardHome })));
+const LeadsPage       = lazy(() => import('./pages/dashboard/LeadsPage').then(m => ({ default: m.LeadsPage })));
+const ProjectsPage    = lazy(() => import('./pages/dashboard/ProjectsPage').then(m => ({ default: m.ProjectsPage })));
+const ClientsPage     = lazy(() => import('./pages/dashboard/ClientsPage').then(m => ({ default: m.ClientsPage })));
+const AnalyticsPage   = lazy(() => import('./pages/dashboard/AnalyticsPage').then(m => ({ default: m.AnalyticsPage })));
+const AgentsPage      = lazy(() => import('./pages/dashboard/AgentsPage').then(m => ({ default: m.AgentsPage })));
+const ProposalsPage   = lazy(() => import('./pages/dashboard/ProposalsPage').then(m => ({ default: m.ProposalsPage })));
+const MissionControl  = lazy(() => import('./pages/dashboard/MissionControl').then(m => ({ default: m.MissionControl })));
+
+// #10 — ErrorBoundary for public pages
+class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
+  state = { hasError: false };
+  static getDerivedStateFromError() { return { hasError: true }; }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ padding: '96px 24px', textAlign: 'center' }}>
+          <h2 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 'clamp(28px, 5vw, 48px)', color: 'var(--charcoal)', margin: '0 0 16px' }}>
+            SOMETHING WENT WRONG.
+          </h2>
+          <p style={{ fontFamily: '"Plus Jakarta Sans", sans-serif', fontSize: 16, color: 'var(--charcoal)', opacity: 0.7 }}>
+            Reload the page or <a href="/" style={{ color: 'var(--red)' }}>go home</a>.
+          </p>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 function PageLoader() {
   return (
     <div className="flex h-[50vh] items-center justify-center">
@@ -36,16 +60,21 @@ function PageLoader() {
   );
 }
 
-// A wrapper for the public-facing pages (Navbar + Footer)
+// #28 pt-24 restored to main so non-hero pages sit below navbar
+// #3  TweaksPanel moved here from HomePage so it's available site-wide
 function PublicLayout() {
   const { theme, grain } = useThemeStore();
   return (
     <div className={`gp-root theme-${theme}${grain ? ' gp-grain' : ''} min-h-[100dvh]`}>
       <Navbar />
-      <main id="main-content" className="pb-16">
-        <Outlet />
+      <main id="main-content" className="pb-16 relative z-10">
+        <ErrorBoundary>
+          <Outlet />
+        </ErrorBoundary>
       </main>
       <Footer />
+      <WhatsAppToggle />
+      <TweaksPanel />
     </div>
   );
 }
@@ -56,16 +85,16 @@ function AppRoutes() {
       <Routes>
         {/* Public Routes */}
         <Route element={<PublicLayout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/production" element={<ProductionPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/demo" element={<DemoPage />} />
+          <Route path="/"            element={<HomePage />} />
+          <Route path="/services"    element={<ServicesPage />} />
+          <Route path="/how-it-works" element={<HowItWorksPage />} />
+          <Route path="/about"       element={<AboutPage />} />
+          <Route path="/contact"     element={<ContactPage />} />
+          <Route path="/demo"        element={<DemoPage />} />
         </Route>
 
         {/* Auth Routes */}
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login"  element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
 
         {/* Protected Dashboard Routes */}
@@ -77,14 +106,14 @@ function AppRoutes() {
             </ProtectedRoute>
           }
         >
-          <Route index element={<DashboardHome />} />
-          <Route path="mission-control" element={<MissionControl />} />
-          <Route path="leads" element={<LeadsPage />} />
-          <Route path="projects" element={<ProjectsPage />} />
-          <Route path="clients" element={<ClientsPage />} />
-          <Route path="analytics" element={<AnalyticsPage />} />
-          <Route path="agents" element={<AgentsPage />} />
-          <Route path="proposals" element={<ProposalsPage />} />
+          <Route index                      element={<DashboardHome />} />
+          <Route path="mission-control"     element={<MissionControl />} />
+          <Route path="leads"               element={<LeadsPage />} />
+          <Route path="projects"            element={<ProjectsPage />} />
+          <Route path="clients"             element={<ClientsPage />} />
+          <Route path="analytics"           element={<AnalyticsPage />} />
+          <Route path="agents"              element={<AgentsPage />} />
+          <Route path="proposals"           element={<ProposalsPage />} />
         </Route>
       </Routes>
     </Suspense>

@@ -1,17 +1,17 @@
 import { motion } from 'framer-motion';
 
 const stats = [
-  { number: '180+', label: 'HAPPY CLIENTS',       sub: 'Across tech, healthcare, retail' },
-  { number: '95%',  label: 'SUCCESS RATE',         sub: 'On-time, on-budget delivery' },
-  { number: '500+', label: 'PROJECTS LAUNCHED',    sub: 'MVPs to enterprise platforms' },
-  { number: '12+',  label: 'YEARS COMBINED',       sub: 'Team expertise in digital' },
+  { number: '15+', label: 'HAPPY CLIENTS',       sub: 'Across tech, healthcare, retail' },
+  { number: '95%', label: 'SUCCESS RATE',        sub: 'On-time, on-budget delivery' },
+  { number: '30+', label: 'PROJECTS LAUNCHED',   sub: 'MVPs to enterprise platforms' },
+  { number: '3',   label: 'YEARS EXPERIENCE',    sub: 'Industry expertise' },
 ];
 
 const tickerItems = [
   'XERO SEVEN', '★', 'GALACTIC AI AGENCY', '✦', 'SUMMON THE SWARM', '◉',
-  'V7.02 · 銀河バイト', '★', 'COMMAND THE GALAXY', '✦', 'INDORE · INDIA', '◉',
+  'V7.02 · GALACTIC CORE', '★', 'COMMAND THE GALAXY', '✦', 'INDORE · INDIA', '◉',
   'XERO SEVEN', '★', 'GALACTIC AI AGENCY', '✦', 'SUMMON THE SWARM', '◉',
-  'V7.02 · 銀河バイト', '★', 'COMMAND THE GALAXY', '✦', 'INDORE · INDIA', '◉',
+  'V7.02 · GALACTIC CORE', '★', 'COMMAND THE GALAXY', '✦', 'INDORE · INDIA', '◉',
 ];
 
 export function PremiumStatsSection() {
@@ -65,7 +65,6 @@ export function PremiumStatsSection() {
             margin: '0 auto',
             padding: '0 24px',
             display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
           }}
           className="grid-cols-2 md:grid-cols-4"
         >
@@ -86,7 +85,7 @@ export function PremiumStatsSection() {
                 style={{
                   fontFamily: '"Archivo Black", sans-serif',
                   fontSize: 'clamp(36px, 4vw, 52px)',
-                  color: idx === 0 ? 'var(--red)' : idx === 1 ? 'var(--purple)' : idx === 2 ? 'var(--mustard-dark, #e6a800)' : 'var(--charcoal)',
+                  color: idx === 0 ? 'var(--red)' : idx === 1 ? 'var(--purple)' : idx === 2 ? 'var(--mustard-dk)' : 'var(--charcoal)',
                   lineHeight: 1,
                   marginBottom: 6,
                 }}

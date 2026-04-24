@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ListIcon, XIcon } from '@phosphor-icons/react';
 
 const navLinks = [
-  { label: 'SERVICES',   path: '/services' },
-  { label: 'PRODUCTION', path: '/production' },
-  { label: 'ABOUT',      path: '/about' },
-  { label: 'CONTACT',    path: '/contact' },
+  { label: 'SERVICES',     path: '/services' },
+  { label: 'HOW IT WORKS', path: '/how-it-works' },
+  { label: 'ABOUT',        path: '/about' },
+  { label: 'CONTACT',      path: '/contact' },
 ];
 
 export default function Navbar() {
@@ -27,15 +28,20 @@ export default function Navbar() {
         initial={{ y: -48, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
-        className="fixed top-0 left-0 right-0 w-full z-50"
-        style={{background: 'var(--mustard)', boxShadow: 'none', borderRadius: 0, border: 'none'}}
+        className="absolute top-0 left-0 right-0 w-full z-50"
+        style={{
+          background: 'var(--mustard)',
+          borderBottom: '3px solid var(--charcoal)',
+          boxShadow: '0 3px 0 var(--charcoal)',
+          borderRadius: 0,
+        }}
       >
         <div
           style={{
             background: 'transparent',
             border: 'none',
             borderRadius: 0,
-            padding: '8px 0',
+            padding: '16px 0',
             display: 'flex',
             alignItems: 'center',
             gap: 4,
@@ -43,11 +49,11 @@ export default function Navbar() {
             width: '100%',
             justifyContent: 'space-between',
             minWidth: 0,
-            overflow: 'auto',
+            overflow: 'hidden',
             maxWidth: '1280px',
             margin: '0 auto',
           }}
-          className="w-full min-w-0 px-3 md:px-8"
+          className="w-full min-w-0 px-4 md:px-8"
         >
           {/* Logo */}
           <Link
@@ -55,7 +61,7 @@ export default function Navbar() {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 8,
+              gap: 12,
               paddingLeft: 8,
               paddingRight: 10,
               textDecoration: 'none',
@@ -67,24 +73,24 @@ export default function Navbar() {
             {/* X mark */}
             <div
               style={{
-                width: 24,
-                height: 24,
+                width: 36,
+                height: 36,
                 background: 'var(--charcoal)',
-                borderRadius: 6,
+                borderRadius: 8,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
-              className="md:w-[30px] md:h-[30px] md:rounded-[9px]"
+              className="md:w-[44px] md:h-[44px] md:rounded-[12px]"
             >
               <span
                 style={{
                   fontFamily: '"Archivo Black", sans-serif',
-                  fontSize: 12,
+                  fontSize: 16,
                   color: 'var(--mustard)',
                   lineHeight: 1,
                 }}
-                className="md:text-base"
+                className="md:text-xl"
               >
                 X
               </span>
@@ -92,12 +98,12 @@ export default function Navbar() {
             <span
               style={{
                 fontFamily: '"Archivo Black", sans-serif',
-                fontSize: 11,
+                fontSize: 14,
                 color: 'var(--charcoal)',
                 letterSpacing: '0.06em',
                 display: 'block',
               }}
-              className="md:text-sm"
+              className="md:text-base"
             >
               XERO SEVEN
             </span>
@@ -107,16 +113,16 @@ export default function Navbar() {
           <div style={{ width: 2, height: 20, background: 'var(--charcoal)', opacity: 0.2, borderRadius: 1, margin: '0 4px' }} className="hidden md:block" />
 
           {/* Desktop nav links */}
-          <div className="hidden md:flex items-center gap-1 min-w-0">
+          <div className="hidden md:flex items-center gap-2 min-w-0">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 style={{
-                  padding: '6px 12px',
+                  padding: '8px 16px',
                   borderRadius: 999,
                   fontFamily: '"JetBrains Mono", monospace',
-                  fontSize: 9,
+                  fontSize: 11,
                   fontWeight: 700,
                   letterSpacing: '0.08em',
                   textDecoration: 'none',
@@ -132,23 +138,23 @@ export default function Navbar() {
           </div>
 
           {/* Status dot + Get Started */}
-          <div className="hidden md:flex items-center gap-2 ml-1 mr-1 min-w-0">
-            <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+          <div className="hidden md:flex items-center gap-4 ml-2 mr-2 min-w-0">
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <span
                 style={{
-                  width: 6,
-                  height: 6,
+                  width: 8,
+                  height: 8,
                   borderRadius: '50%',
-                  background: '#22c55e',
+                  background: 'var(--mint)',
                   display: 'inline-block',
-                  boxShadow: '0 0 0 2px rgba(34,197,94,0.3)',
+                  boxShadow: '0 0 0 3px rgba(99,226,180,0.3)',
                   animation: 'pulse 2s infinite',
                 }}
               />
               <span
                 style={{
                   fontFamily: '"JetBrains Mono", monospace',
-                  fontSize: 8,
+                  fontSize: 10,
                   letterSpacing: '0.1em',
                   color: 'var(--charcoal)',
                   opacity: 0.7,
@@ -162,24 +168,24 @@ export default function Navbar() {
                 style={{
                   background: 'var(--red)',
                   color: 'var(--bone)',
-                  border: '2.5px solid var(--charcoal)',
+                  border: '3px solid var(--charcoal)',
                   borderRadius: 999,
-                  padding: '6px 14px',
+                  padding: '10px 20px',
                   fontFamily: '"Archivo Black", sans-serif',
-                  fontSize: 9,
+                  fontSize: 11,
                   letterSpacing: '0.08em',
                   cursor: 'pointer',
-                  boxShadow: '3px 3px 0 var(--charcoal)',
+                  boxShadow: '4px 4px 0 var(--charcoal)',
                   transition: 'transform 0.15s ease, box-shadow 0.15s ease',
                   whiteSpace: 'nowrap',
                 }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.transform = 'translate(-1px,-1px)';
-                  (e.currentTarget as HTMLButtonElement).style.boxShadow = '4px 4px 0 var(--charcoal)';
+                  (e.currentTarget as HTMLButtonElement).style.transform = 'translate(-2px,-2px)';
+                  (e.currentTarget as HTMLButtonElement).style.boxShadow = '6px 6px 0 var(--charcoal)';
                 }}
                 onMouseLeave={(e) => {
                   (e.currentTarget as HTMLButtonElement).style.transform = 'translate(0,0)';
-                  (e.currentTarget as HTMLButtonElement).style.boxShadow = '3px 3px 0 var(--charcoal)';
+                  (e.currentTarget as HTMLButtonElement).style.boxShadow = '4px 4px 0 var(--charcoal)';
                 }}
               >
                 DASHBOARD ↗
@@ -198,9 +204,9 @@ export default function Navbar() {
               background: 'none',
               border: 'none',
               cursor: 'pointer',
-              padding: '6px',
+              padding: '8px',
               color: 'var(--charcoal)',
-              fontSize: 18,
+              fontSize: 24,
               lineHeight: 1,
               display: 'flex',
               alignItems: 'center',
@@ -208,7 +214,7 @@ export default function Navbar() {
               minWidth: 0,
             }}
           >
-            {isOpen ? '✕' : '☰'}
+            {isOpen ? <XIcon weight="bold" size={28} /> : <ListIcon weight="bold" size={28} />}
           </button>
         </div>
       </motion.nav>

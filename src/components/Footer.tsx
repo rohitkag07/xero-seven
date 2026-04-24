@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { InstagramLogoIcon, XLogoIcon, LinkedinLogoIcon, EnvelopeSimpleIcon } from '@phosphor-icons/react';
 
 export default function Footer() {
   return (
@@ -50,17 +51,17 @@ export default function Footer() {
                 maxWidth: 280,
               }}
             >
-              Indore's full-service digital agency. Websites, e-commerce, social media, photography, and AI automation — under one roof.
+              Indore's AI-first digital agency. We deploy autonomous agent swarms that grow revenue, automate operations, and build your digital empire — 24/7.
             </p>
 
             {/* Social */}
             <div style={{ display: 'flex', gap: 10, marginTop: 24 }}>
-              {[
-                { label: 'Instagram', url: 'https://www.instagram.com/xeroseven', icon: '📸' },
-                { label: 'X', url: 'https://x.com/xeroseven', icon: '𝕏' },
-                { label: 'LinkedIn', url: 'https://www.linkedin.com/company/xeroseven', icon: '💼' },
-                { label: 'Email', url: 'mailto:hello@xeroseven.ai', icon: '✉️' },
-              ].map((s) => (
+              {([
+                { label: 'Instagram', url: 'https://www.instagram.com/xeroseven', Icon: InstagramLogoIcon },
+                { label: 'X', url: 'https://x.com/xeroseven', Icon: XLogoIcon },
+                { label: 'LinkedIn', url: 'https://www.linkedin.com/company/xeroseven', Icon: LinkedinLogoIcon },
+                { label: 'Email', url: 'mailto:hello@xeroseven.ai', Icon: EnvelopeSimpleIcon },
+              ] as const).map((s) => (
                 <a
                   key={s.label}
                   href={s.url}
@@ -75,9 +76,9 @@ export default function Footer() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: 14,
                     textDecoration: 'none',
                     transition: 'all 0.2s ease',
+                    color: 'var(--bone)',
                   }}
                   onMouseEnter={(e) => {
                     (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--mustard)';
@@ -88,7 +89,7 @@ export default function Footer() {
                     (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
                   }}
                 >
-                  {s.icon}
+                  <s.Icon weight="duotone" size={18} />
                 </a>
               ))}
             </div>
@@ -111,10 +112,10 @@ export default function Footer() {
               {[
                 { label: 'Website Development', path: '/services#webdev' },
                 { label: 'E-Commerce Stores', path: '/services#ecommerce' },
-                { label: 'Social Media', path: '/services#social' },
-                { label: 'WhatsApp Automation', path: '/services#whatsapp' },
-                { label: 'Photography & Video', path: '/production' },
-                { label: 'Custom Software', path: '/services#saas' },
+                { label: 'WhatsApp AI Automation', path: '/services#whatsapp' },
+                { label: 'Dealer Management Systems', path: '/services#saas' },
+                { label: 'Ghost Closer — Sales AI', path: '/services#ai-chat' },
+                { label: 'Social Media Management', path: '/services#social' },
               ].map(({ label, path }) => (
                 <li key={label} style={{ marginBottom: 10 }}>
                   <Link
@@ -154,7 +155,7 @@ export default function Footer() {
               {[
                 { label: 'About Us', path: '/about' },
                 { label: 'All Services', path: '/services' },
-                { label: 'Production Studio', path: '/production' },
+                { label: 'How It Works', path: '/how-it-works' },
                 { label: 'Contact', path: '/contact' },
               ].map(({ label, path }) => (
                 <li key={label} style={{ marginBottom: 10 }}>

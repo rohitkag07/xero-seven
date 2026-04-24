@@ -178,8 +178,6 @@
   mix-blend-mode: overlay;
 }
 
-.gp-root > * { position: relative; z-index: 1; }
-
 @layer components {
 
   /* ——— Typography ——— */

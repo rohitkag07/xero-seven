@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
+import { MagnifyingGlassIcon, PaintBrushIcon, LightningIcon, RocketLaunchIcon } from '@phosphor-icons/react';
 
 const steps = [
   {
     number: '01',
-    emoji: '🔍',
+    Icon: MagnifyingGlassIcon,
     title: 'DISCOVER & PLAN',
     description: 'We dive deep into your challenges, market, and vision. Together we craft a strategic roadmap tailored to your goals.',
     details: ['Strategic audit', 'Competitive analysis', 'Goal setting', 'Timeline planning'],
@@ -11,7 +12,7 @@ const steps = [
   },
   {
     number: '02',
-    emoji: '🎨',
+    Icon: PaintBrushIcon,
     title: 'DESIGN & PROTOTYPE',
     description: 'Our designers create stunning, user-centered designs. We prototype and iterate based on your feedback.',
     details: ['Wireframes', 'Visual design', 'Prototyping', 'User testing'],
@@ -19,7 +20,7 @@ const steps = [
   },
   {
     number: '03',
-    emoji: '⚡',
+    Icon: LightningIcon,
     title: 'BUILD & OPTIMIZE',
     description: 'Our engineers build with modern tech stack. We optimize for speed, security, and scalability from day one.',
     details: ['Development', 'Testing', 'Security audit', 'Performance optimization'],
@@ -27,7 +28,7 @@ const steps = [
   },
   {
     number: '04',
-    emoji: '🚀',
+    Icon: RocketLaunchIcon,
     title: 'LAUNCH & GROW',
     description: 'We deploy your solution, set up analytics, and provide ongoing support. Then we help you scale.',
     details: ['Deployment', 'Analytics setup', 'Monitoring', 'Growth strategy'],
@@ -132,7 +133,7 @@ export function PremiumHowItWorksSection() {
                   >
                     {step.number}
                   </span>
-                  <span style={{ fontSize: 32 }}>{step.emoji}</span>
+                  <step.Icon weight="duotone" size={32} color="var(--charcoal)" />
                 </div>
 
                 {/* Title */}

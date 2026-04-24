@@ -1,20 +1,21 @@
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { 
-  Globe, ShoppingCart, InstagramLogo, WhatsappLogo, Camera,
-  Code, Cpu, VideoCamera, PenNib
+import {
+  GlobeIcon, ShoppingCartIcon, InstagramLogoIcon, WhatsappLogoIcon, CameraIcon,
+  CodeIcon, CpuIcon, VideoCameraIcon, PenNibIcon
 } from '@phosphor-icons/react';
 
 const capabilities = [
-  { icon: Globe, title: 'Web Development', desc: 'Premium websites & landing pages built with React, Next.js and modern frameworks.', bg: 'var(--mustard-lt)' },
-  { icon: ShoppingCart, title: 'E-Commerce', desc: 'Complete online stores with UPI/card payments, inventory, and order tracking.', bg: 'var(--red-lt)' },
-  { icon: InstagramLogo, title: 'Social Media', desc: 'Content creation, scheduling, analytics, and growth strategy across all platforms.', bg: 'var(--purple-lt)' },
-  { icon: WhatsappLogo, title: 'WhatsApp Automation', desc: 'AI-powered auto-replies, appointment booking, and customer follow-ups 24/7.', bg: '#8AEFCA' },
-  { icon: Camera, title: 'Photography & Video', desc: 'Product photography, brand shoots, event coverage, and promotional videos.', bg: 'var(--mustard-lt)' },
-  { icon: Code, title: 'Custom Software', desc: 'Full-stack app development — MVPs, SaaS platforms, and internal business tools.', bg: 'var(--red-lt)' },
-  { icon: PenNib, title: 'Content & SEO', desc: 'Blog posts, social captions, newsletters, and keyword strategy for organic growth.', bg: 'var(--purple-lt)' },
-  { icon: VideoCamera, title: 'AI Video Production', desc: 'Programmatic video generation for social media ads, reels, and marketing campaigns.', bg: '#8AEFCA' },
-  { icon: Cpu, title: 'Business Automation', desc: 'Connect all your software — Google Sheets, WhatsApp, email, CRM — into one flow.', bg: 'var(--mustard-lt)' },
+  { icon: GlobeIcon, title: 'Web Development', desc: 'Premium websites & landing pages built with React, Next.js and modern frameworks.', bg: 'var(--mustard-lt)' },
+  { icon: ShoppingCartIcon, title: 'E-Commerce', desc: 'Complete online stores with UPI/card payments, inventory, and order tracking.', bg: 'var(--red-lt)' },
+  { icon: InstagramLogoIcon, title: 'Social Media', desc: 'Content creation, scheduling, analytics, and growth strategy across all platforms.', bg: 'var(--purple-lt)' },
+  { icon: WhatsappLogoIcon, title: 'WhatsApp Automation', desc: 'AI-powered auto-replies, appointment booking, and customer follow-ups 24/7.', bg: '#8AEFCA' },
+  { icon: CameraIcon, title: 'Photography & Video', desc: 'Product photography, brand shoots, event coverage, and promotional videos.', bg: 'var(--mustard-lt)' },
+  { icon: CodeIcon, title: 'Custom Software', desc: 'Full-stack app development — MVPs, SaaS platforms, and internal business tools.', bg: 'var(--red-lt)' },
+  { icon: PenNibIcon, title: 'Content & SEO', desc: 'Blog posts, social captions, newsletters, and keyword strategy for organic growth.', bg: 'var(--purple-lt)' },
+  { icon: VideoCameraIcon, title: 'AI Video Production', desc: 'Programmatic video generation for social media ads, reels, and marketing campaigns.', bg: '#8AEFCA' },
+  { icon: CpuIcon, title: 'Business Automation', desc: 'Connect all your software — Google Sheets, WhatsApp, email, CRM — into one flow.', bg: 'var(--mustard-lt)' },
 ];
 
 const values = [
@@ -25,9 +26,13 @@ const values = [
 ];
 
 export default function AboutPage() {
+  useEffect(() => {
+    document.title = 'About — Xero Seven | AI Agency in Indore';
+  }, []);
+
   return (
-    <div style={{ paddingTop: 16 }}>
-      <section style={{ padding: '48px 16px 96px', position: 'relative' }}>
+    <div style={{ paddingTop: 0 }}>
+      <section style={{ padding: '120px 16px 96px', position: 'relative' }}>
         <div style={{ maxWidth: 1152, margin: '0 auto' }}>
           {/* Hero */}
           <motion.div

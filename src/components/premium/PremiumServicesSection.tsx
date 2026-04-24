@@ -2,113 +2,114 @@ import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Globe, ShoppingCart, InstagramLogo, WhatsappLogo, Camera, Code,
-  PenNib, VideoCamera, UserFocus, Cpu,
-  ArrowRight, X, Robot, MegaphoneSimple, Palette
+  GlobeIcon, ShoppingCartIcon, InstagramLogoIcon, WhatsappLogoIcon, CodeIcon,
+  PenNibIcon, UserFocusIcon, CpuIcon, FunnelSimpleIcon, BuildingsIcon,
+  ArrowRightIcon, XIcon, RobotIcon, MegaphoneSimpleIcon, PaletteIcon
 } from '@phosphor-icons/react';
 
-// ─── SERVICE DATABASE — DO NOT MODIFY ───────────────────────
-const serviceCategories = [
-  { id: 'all',        label: 'All Services',       count: 15 },
-  { id: 'digital',    label: 'Digital Presence',   count: 3  },
-  { id: 'marketing',  label: 'Marketing & Growth', count: 4  },
-  { id: 'automation', label: 'Smart Automation',   count: 3  },
-  { id: 'production', label: 'Production & Content', count: 2 },
-  { id: 'agentic',    label: 'AI Specialist Skills', count: 3 },
-];
+// serviceCategories is defined after services so counts are computed dynamically
 
 const services = [
   {
-    id: 'webdev', category: 'digital', icon: Globe,
+    id: 'webdev', category: 'digital', icon: GlobeIcon,
     title: 'Website Development', tagline: 'Premium sites that rank and convert',
     description: 'React, Next.js, Vite — optimized for Google and conversions. From landing pages to full corporate portals with CMS.',
     features: ['React / Next.js', 'Mobile-first', 'SEO optimized', 'Analytics setup', 'Fast (<2s)', 'CMS included'],
     pricing: '₹15,000 – ₹45,000 setup', accentColor: 'var(--mustard)', gridSpan: 'col-span-2 row-span-2'
   },
   {
-    id: 'ecommerce', category: 'digital', icon: ShoppingCart,
+    id: 'ecommerce', category: 'digital', icon: ShoppingCartIcon,
     title: 'E-Commerce & Stores', tagline: 'Sell online with UPI & cards',
     description: 'Complete online stores with Razorpay, Stripe, inventory management, order tracking, and mobile checkout optimization.',
     features: ['UPI/Cards/COD', 'Payment ready', 'Inventory mgmt', 'Order tracking', 'Analytics', 'Mobile optimized'],
     pricing: '₹20,000 – ₹1,00,000 setup', accentColor: 'var(--purple)', gridSpan: 'col-span-1 row-span-1'
   },
   {
-    id: 'saas', category: 'digital', icon: Code,
+    id: 'saas', category: 'digital', icon: CodeIcon,
     title: 'Custom Software & Apps', tagline: 'Your idea, built to scale',
     description: 'Full-stack MVPs, SaaS platforms, internal tools — with secure auth, databases, payments, and cloud hosting.',
     features: ['React + Node.js', 'PostgreSQL', 'Secure auth', 'Payment ready', 'Cloud hosting', 'Admin dashboard'],
     pricing: '₹50,000 – ₹2,00,000 setup', accentColor: 'var(--red)', gridSpan: 'col-span-1 row-span-1'
   },
   {
-    id: 'social', category: 'marketing', icon: InstagramLogo,
+    id: 'social', category: 'marketing', icon: InstagramLogoIcon,
     title: 'Social Media Management', tagline: 'Grow strategically, post consistently',
     description: 'Content creation, scheduling, hashtag strategy, community engagement across Instagram, Facebook, LinkedIn.',
     features: ['30+ posts/month', 'Multi-platform', 'Analytics tracking', 'Hashtag strategy', 'Community mgmt', 'Competitor analysis'],
     pricing: '₹15,000 – ₹30,000/month', accentColor: 'var(--mustard)', gridSpan: 'col-span-1 row-span-1'
   },
   {
-    id: 'content', category: 'marketing', icon: PenNib,
+    id: 'content', category: 'marketing', icon: PenNibIcon,
     title: 'Content & SEO Marketing', tagline: 'Get found on Google organically',
     description: 'SEO-optimized blog articles, social captions, newsletters, and marketing copy — aligned to your brand voice.',
     features: ['4-8 blogs/month', 'Keyword research', 'SEO optimized', 'Email newsletters', 'Brand voice guide', 'Performance tracking'],
     pricing: '₹15,000 – ₹30,000/month', accentColor: 'var(--purple)', gridSpan: 'col-span-1 row-span-1'
   },
   {
-    id: 'video', category: 'production', icon: VideoCamera,
-    title: 'AI Video Production', tagline: 'Professional videos, 48hr turnaround',
-    description: 'Marketing videos, product demos, social ads using AI tools and Remotion. Brand-consistent, unlimited revisions.',
-    features: ['AI-scripted', 'Brand templates', 'Reels/Stories/YouTube', 'Batch production', 'Unlimited revisions', '48hr turnaround'],
-    pricing: '₹8,000 – ₹25,000/project', accentColor: 'var(--red)', gridSpan: 'col-span-1 row-span-1'
+    id: 'ghost-closer', category: 'automation', icon: UserFocusIcon,
+    title: 'Ghost Closer — Sales AI', tagline: 'Autonomous outbound that books meetings while you sleep',
+    description: 'Our Ghost Closer agent identifies prospects on LinkedIn & WhatsApp, sends hyper-personalized sequences, qualifies leads in real-time, and books meetings directly in your calendar — 24/7.',
+    features: ['LinkedIn + WhatsApp outbound', 'AI lead scoring', 'Personalized sequences', 'Calendar booking', '24/7 follow-ups', 'CRM auto-sync'],
+    pricing: '₹15,000 – ₹40,000/month', accentColor: 'var(--red)', gridSpan: 'col-span-1 row-span-1'
   },
   {
-    id: 'whatsapp', category: 'automation', icon: WhatsappLogo,
+    id: 'whatsapp', category: 'automation', icon: WhatsappLogoIcon,
     title: 'WhatsApp AI Automation', tagline: '24/7 customer support bot',
     description: 'AI-powered WhatsApp bot with auto-replies in Hindi & English, appointment booking, FAQ answers, and emergency detection.',
     features: ['24/7 replies', 'Bilingual (HI/EN)', 'Booking automation', 'Emergency detection', 'Daily summaries', 'Custom flows'],
     pricing: '₹10,000 setup + ₹2,000/month', accentColor: 'var(--mustard)', gridSpan: 'col-span-2 row-span-1'
   },
   {
-    id: 'leads', category: 'automation', icon: UserFocus,
+    id: 'leads', category: 'automation', icon: FunnelSimpleIcon,
     title: 'Lead Capture & Qualification', tagline: 'Turn interest into opportunities',
     description: 'Smart forms, email funnels, lead scoring, CRM integration — automatically qualify and nurture your leads.',
     features: ['Smart forms', 'Email funnels', 'Lead scoring', 'CRM sync', 'Auto-qualification', 'Email nurturing'],
     pricing: '₹8,000 setup', accentColor: 'var(--purple)', gridSpan: 'col-span-1 row-span-1'
   },
   {
-    id: 'integration', category: 'automation', icon: Cpu,
+    id: 'integration', category: 'automation', icon: CpuIcon,
     title: 'Business Automation', tagline: 'Connect 100+ tools, eliminate manual work',
     description: 'Zapier, Make, n8n workflows — automate data flows between your CRM, email, spreadsheets, and tools.',
     features: ['100+ app integrations', 'Workflow automation', 'Data syncing', 'Error handling', 'Monthly optimization', 'Cost savings'],
     pricing: '₹5,000 – ₹15,000/month', accentColor: 'var(--red)', gridSpan: 'col-span-1 row-span-1'
   },
   {
-    id: 'photography', category: 'production', icon: Camera,
-    title: 'Photography & Visual Content', tagline: '4K photos, professional editing',
-    description: 'Product photography, corporate shoots, event coverage with professional editing and batch turnaround.',
-    features: ['4K quality', 'Raw + edited', 'Batch processing', 'Color grading', 'Web optimization', 'Fast delivery'],
-    pricing: '₹8,000 – ₹20,000/day', accentColor: 'var(--mustard)', gridSpan: 'col-span-1 row-span-1'
+    id: 'dealer-mgmt', category: 'automation', icon: BuildingsIcon,
+    title: 'Dealer Management System', tagline: 'Custom DMS built for Indian distributors',
+    description: 'Full-stack SaaS DMS with dealer portals, stock tracking, order management, GST invoice generation, WhatsApp alerts, and real-time analytics — like we built for Kag Batteries.',
+    features: ['Dealer portal login', 'Stock & order tracking', 'GST invoice auto-gen', 'WhatsApp dispatch alerts', 'Payment reconciliation', 'Real-time dashboard'],
+    pricing: '₹80,000 – ₹2,50,000 setup', accentColor: 'var(--mustard)', gridSpan: 'col-span-1 row-span-1'
   },
   {
-    id: 'ai-chat', category: 'agentic', icon: Robot,
+    id: 'ai-chat', category: 'agentic', icon: RobotIcon,
     title: 'AI Chat Agents', tagline: 'Agentic AI for your business',
     description: 'Custom AI agents for customer support, lead qualification, data analysis, and decision-making assistance.',
     features: ['Custom training', 'Multi-channel', 'Memory system', 'Analytics ready', 'Easy integration', 'Continuous learning'],
     pricing: '₹25,000 – ₹75,000/month', accentColor: 'var(--purple)', gridSpan: 'col-span-1 row-span-2'
   },
   {
-    id: 'marketing-ai', category: 'agentic', icon: MegaphoneSimple,
+    id: 'marketing-ai', category: 'agentic', icon: MegaphoneSimpleIcon,
     title: 'AI Marketing Agent', tagline: 'Data-driven campaign optimization',
     description: 'AI agents that analyze performance metrics, optimize campaigns, test variations, and recommend strategies.',
     features: ['Performance analysis', 'Campaign optimization', 'A/B testing', 'Data visualization', 'Recommendations', 'Real-time alerts'],
     pricing: '₹20,000 – ₹60,000/month', accentColor: 'var(--red)', gridSpan: 'col-span-1 row-span-1'
   },
   {
-    id: 'design-ai', category: 'agentic', icon: Palette,
+    id: 'design-ai', category: 'agentic', icon: PaletteIcon,
     title: 'AI Design Systems', tagline: 'Scalable design operations',
     description: 'AI-powered design systems that generate assets, maintain consistency, and scale creative operations.',
     features: ['Asset generation', 'Brand consistency', 'Design systems', 'Template creation', 'Version control', 'Team collaboration'],
     pricing: '₹15,000 – ₹50,000/month', accentColor: 'var(--mustard)', gridSpan: 'col-span-1 row-span-1'
   },
+];
+
+// Counts derived from data — never go stale
+const serviceCategories = [
+  { id: 'all',        label: 'All Services',         count: services.length },
+  { id: 'digital',    label: 'Digital Presence',     count: services.filter(s => s.category === 'digital').length },
+  { id: 'marketing',  label: 'Marketing & Growth',   count: services.filter(s => s.category === 'marketing').length },
+  { id: 'automation', label: 'Smart Automation',     count: services.filter(s => s.category === 'automation').length },
+  { id: 'agentic',    label: 'AI Specialist Skills', count: services.filter(s => s.category === 'agentic').length },
 ];
 
 // ─── SERVICE MODAL — business logic intact ───────────────────
@@ -184,7 +185,7 @@ function ServiceModal({ service, onClose }: { service: typeof services[0]; onClo
                 cursor: 'pointer', fontSize: 16, flexShrink: 0,
               }}
             >
-              <X size={18} weight="bold" />
+              <XIcon size={18} weight="bold" />
             </button>
           </div>
 
@@ -236,7 +237,7 @@ function ServiceModal({ service, onClose }: { service: typeof services[0]; onClo
                 boxShadow: '4px 4px 0 rgba(0,0,0,0.3)',
               }}>
                 GET A FREE QUOTE
-                <ArrowRight size={18} weight="bold" />
+                <ArrowRightIcon size={18} weight="bold" />
               </button>
             </Link>
           </div>
@@ -394,7 +395,7 @@ export function PremiumServicesSection() {
 
         {/* Bento grid */}
         <motion.div layout className="grid grid-cols-1 md:grid-cols-4 gap-5">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="popLayout">
             {filteredServices.map((service, idx) => (
               <motion.div
                 key={service.id}
@@ -403,7 +404,7 @@ export function PremiumServicesSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.35, delay: idx * 0.04, ease: 'easeOut' }}
-                className={service.gridSpan}
+                className={`col-span-1 md:${service.gridSpan}`}
               >
                 <ServiceCard service={service} onClick={() => setSelectedService(service)} />
               </motion.div>
@@ -446,7 +447,7 @@ export function PremiumServicesSection() {
                 display: 'inline-flex', alignItems: 'center', gap: 10,
               }}
             >
-              GET A FREE CONSULTATION <ArrowRight size={16} weight="bold" />
+              GET A FREE CONSULTATION <ArrowRightIcon size={16} weight="bold" />
             </motion.button>
           </Link>
         </motion.div>
